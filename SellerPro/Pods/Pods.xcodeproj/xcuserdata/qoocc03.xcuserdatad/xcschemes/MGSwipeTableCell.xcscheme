@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CD843D79456D9692E6C47EA5208D15A7'
-               BlueprintName = 'SDWebImage'
+               BlueprintIdentifier = '43AFBF4F2CD231A7499E3B7813A16837'
+               BlueprintName = 'MGSwipeTableCell'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libSDWebImage.a'>
+               BuildableName = 'libMGSwipeTableCell.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

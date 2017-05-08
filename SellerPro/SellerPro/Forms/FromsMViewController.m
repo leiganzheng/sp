@@ -21,6 +21,13 @@
     [self setLeftBackNavItem];
     self.title = @"业绩报表";
     self.numberOfTabs = 3;   ///////当设置数量时，去调用setter方法去加载控件
+    self.navigationItem.rightBarButtonItem = ({
+    
+            UIBarButtonItem *button;
+            button = [[UIBarButtonItem alloc] initWithTitle:@"选择" style:UIBarButtonItemStylePlain target:self action:@selector(select)];
+    
+            button;
+        });
     
 }
 
@@ -86,7 +93,10 @@
     
     return cvc;
 }
-
+#pragma mark -- private method
+- (void)select{
+    
+}
 
 #pragma mark --TabContainerDelegate
 -(CGFloat)heightForTabInTabContainer:(TabContainerViewController *)tabContainer {

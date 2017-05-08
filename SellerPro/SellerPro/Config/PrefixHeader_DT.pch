@@ -16,6 +16,7 @@
 ////app工具
 #import "DTNetManger.h"
 #import "OpenUDID.h"
+#import "MGSwipeTableCell.h"
 //#import "DTBaseModel.h"
 //#import "NSURL+DT_Ex.h"
 //#import "UIView+DT_Ex.h"

@@ -1,15 +1,15 @@
 //
-//  ServiceViewController.m
+//  TimeViewController.m
 //  SellerPro
 //
-//  Created by leiganzheng on 2017/5/7.
+//  Created by leiganzheng on 2017/5/8.
 //  Copyright © 2017年 karashock. All rights reserved.
 //
 
-#import "ServiceViewController.h"
+#import "TimeViewController.h"
 #import "DTMyTableViewCell.h"
 
-@interface ServiceViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TimeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -17,7 +17,7 @@
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
-@implementation ServiceViewController
+@implementation TimeViewController
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
@@ -27,14 +27,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = RGB(249, 249, 249);
         _myTableView.separatorColor = DT_Base_LineColor;
-        [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@"服务项目-",@"服务项目-",@"服务项目-",@"服务项目-"];
+        _dataSource = @[@"1月",@"1月",@"1月",@"1月"];
     }
     return _dataSource;
 }
@@ -81,5 +81,3 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - private action
 // 免责声明
 @end
-
-

@@ -28,6 +28,7 @@
 		BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4391EC05A5E00D67843 /* FPPopoverController.m */; };
 		BB87F43F1EC05A5E00D67843 /* FPPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */; };
 		BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43D1EC05A5E00D67843 /* FPTouchView.m */; };
+		BB87F4431EC05D2500D67843 /* TimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4421EC05D2500D67843 /* TimeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,8 @@
 		BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverView.m; sourceTree = "<group>"; };
 		BB87F43C1EC05A5E00D67843 /* FPTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTouchView.h; sourceTree = "<group>"; };
 		BB87F43D1EC05A5E00D67843 /* FPTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTouchView.m; sourceTree = "<group>"; };
+		BB87F4411EC05D2500D67843 /* TimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeViewController.h; sourceTree = "<group>"; };
+		BB87F4421EC05D2500D67843 /* TimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeViewController.m; sourceTree = "<group>"; };
 		D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +120,8 @@
 			children = (
 				7109ED491EBEF16500C542AC /* FromsMViewController.h */,
 				7109ED4A1EBEF16500C542AC /* FromsMViewController.m */,
+				BB87F4411EC05D2500D67843 /* TimeViewController.h */,
+				BB87F4421EC05D2500D67843 /* TimeViewController.m */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -385,6 +390,7 @@
 				710FEF581EBEE23C0064CC85 /* main.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
+				BB87F4431EC05D2500D67843 /* TimeViewController.m in Sources */,
 				7109ED421EBEEA7B00C542AC /* DTMyTableViewCell.m in Sources */,
 				7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */,
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
