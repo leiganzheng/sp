@@ -9,6 +9,9 @@
 #import "LoginViewController.h"
 #import "ForgetPWViewController.h"
 @interface LoginViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *login;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
+@property (weak, nonatomic) IBOutlet UITextField *pwTF;
 
 @end
 
@@ -16,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [Tools configCornerOfView:_login with:3];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,7 +27,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)loginAction:(id)sender {
-    [DTNetManger loginWith:@"18682242936" PW:@"123456" callBack:^(NSError *error, NSArray *response) {
+    [DTNetManger loginWith:@"18682242936" PW:@"123" callBack:^(NSError *error, NSArray *response) {
         
     }];
 }

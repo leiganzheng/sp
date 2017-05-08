@@ -1,19 +1,15 @@
 //
-//  MainViewController.m
+//  PersionViewController.m
 //  SellerPro
 //
-//  Created by leiganzheng on 2017/5/7.
+//  Created by leiganzheng on 2017/5/8.
 //  Copyright © 2017年 karashock. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "PersionViewController.h"
 #import "DTMyTableViewCell.h"
-#import "EmployeeViewController.h"
-#import "FromsMViewController.h"
-#import "ServiceViewController.h"
-#import "ForgetPWViewController.h"
 
-@interface MainViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PersionViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -22,7 +18,7 @@
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
-@implementation MainViewController
+@implementation PersionViewController
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
@@ -39,7 +35,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@"业绩报表",@"员工管理",@"服务项目",@"密码设置"];
+        _dataSource = @[@"吴建权",@"吴建权",@"吴建权",@"吴建权"];
     }
     return _dataSource;
 }
@@ -53,12 +49,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首页";
     [self.view addSubview:self.myTableView];
-    UIImageView * im= [[UIImageView alloc] init];
-    im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, _myTableView.frame.size.height + 10, 150, 28);
-    im.image = [UIImage imageNamed:@"home_img_92logo"];
-    [self.view addSubview:im];
 }
 
 #pragma mark - tableView Delegate
@@ -87,48 +78,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     myCell.titleLabel.textColor = DT_Base_TitleColor;
     myCell.iconView.hidden = NO;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-   
+    
     myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
     myCell.titleLabel.text = self.dataSource[indexPath.row];
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-    switch (indexPath.row) {
-        case 0:
-        {
-            FromsMViewController *cvc = [board instantiateViewControllerWithIdentifier:@"FromsMViewController"];
-            [self.navigationController pushViewController:cvc animated:YES];
-        }
- 
-            break;
-        case 1:
-        {
-            EmployeeViewController *cvc = [board instantiateViewControllerWithIdentifier:@"EmployeeViewController"];
-            [self.navigationController pushViewController:cvc animated:YES];
-        }
-            break;
-        case 2:
-        {
-            ServiceViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ServiceViewController"];
-            [self.navigationController pushViewController:cvc animated:YES];
-        }
-  
-            break;
-        case 3:
-        {
-            ForgetPWViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ForgetPWViewController"];
-            [self.navigationController pushViewController:cvc animated:YES];
-        }
-  
-            break;
-            
-        default:
-            break;
-    }
 
-}
-#pragma mark - private action
-// 免责声明
 @end

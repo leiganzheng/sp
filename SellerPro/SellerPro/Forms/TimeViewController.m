@@ -21,13 +21,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-64) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 80;
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 200, 300) style:UITableViewStylePlain];
+        _myTableView.rowHeight = 40;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = RGB(249, 249, 249);
         _myTableView.separatorColor = DT_Base_LineColor;
-        [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
@@ -40,7 +40,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"服务项目";
+    self.title = @"选择月份";
     [self setLeftBackNavItem];
     [self.view addSubview:self.myTableView];
 }
@@ -50,28 +50,16 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     return self.dataSource.count;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 20;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 0.01;
-}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *myCell = (DTMyTableViewCell *)cell;
-    myCell.titleLabel.textColor = DT_Base_TitleColor;
-    myCell.iconView.hidden = NO;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    //    myCell.iconView.image = [UIImage imageNamed:@"dt_tabbar_make_selete"];
-    myCell.titleLabel.text = self.dataSource[indexPath.row];
+    UITableViewCell *myCell = (UITableViewCell *)cell;
+    myCell.textLabel.text = self.dataSource[indexPath.row];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

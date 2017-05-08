@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DTBaseViewController.h"
 @interface SettingPWViewController : DTBaseViewController
-
+@property (nonatomic,strong) NSString *phone;
+@property (nonatomic,strong) NSString *code;
 @end

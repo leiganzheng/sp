@@ -76,7 +76,7 @@
     /////绘制顶部的线
     [bezierPath moveToPoint:CGPointMake(0, 0)];
     [bezierPath addLineToPoint:CGPointMake(CGRectGetMaxX(rect), 0)];
-    [[UIColor colorWithWhite:197.0/255.0 alpha:0.75] setStroke];
+    [[UIColor blackColor] setStroke];
     [bezierPath setLineWidth:1.0];
     [bezierPath stroke];
     
@@ -205,7 +205,7 @@
     //////定义tabsView的位置及大小
     CGRect frame = self.tabsView.frame;
     frame.origin.x = 0.0;
-    frame.origin.y = topLayoutGuid; //////固定在了顶部，也可根据需求进行修改
+    frame.origin.y = 0; //////固定在了顶部，也可根据需求进行修改
     frame.size.width = CGRectGetWidth(self.view.frame);
     frame.size.height = [self.tabHeight floatValue];
     

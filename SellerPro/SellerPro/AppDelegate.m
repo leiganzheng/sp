@@ -19,6 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UINavigationBar *navBar = [UINavigationBar appearance];
+    navBar.translucent = NO;
     navBar.barStyle = UIBarStyleBlack;
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] , NSFontAttributeName:DT_Nav_TitleFont}];
     navBar.barTintColor = [UIColor blackColor];

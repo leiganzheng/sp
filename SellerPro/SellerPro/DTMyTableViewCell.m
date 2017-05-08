@@ -32,10 +32,7 @@
     if (!_bgView) {
         _bgView = [[UIView alloc] init];
         _bgView.backgroundColor = [UIColor whiteColor];
-        _bgView.layer.masksToBounds = YES;
-        _bgView.layer.cornerRadius = 5;
-        _bgView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        _bgView.layer.borderWidth = 1;
+        [Tools configCornerOfView:_bgView with:3];
     }
     return _bgView;
 }
@@ -56,7 +53,7 @@
         
         make.left.equalTo(self.contentView).with.offset(4);
         make.centerY.equalTo(self.contentView);
-        make.size.mas_equalTo(CGSizeMake(KSCREEN_WIDTH, 100));
+        make.size.mas_equalTo(CGSizeMake(KSCREEN_WIDTH-8, self.contentView.frame.size.height - 8));
     }];
     
     [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {

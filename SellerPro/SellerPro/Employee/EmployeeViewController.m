@@ -8,6 +8,9 @@
 
 #import "EmployeeViewController.h"
 #import "ContentViewController.h"
+#import "StaffViewController.h"
+#import "WorkTypeViewController.h"
+
 @interface EmployeeViewController () <TabContainerDelegate,TabContainerDataSource>
 @property (nonatomic) NSUInteger numberOfTabs;
 @end
@@ -20,15 +23,6 @@
     self.delegate = self;
     [self setLeftBackNavItem];
     self.title = @"员工管理";
-    
-//    self.navigationItem.rightBarButtonItem = ({
-//        
-//        UIBarButtonItem *button;
-//        button = [[UIBarButtonItem alloc] initWithTitle:@"Tab #3" style:UIBarButtonItemStylePlain target:self action:@selector(selectTabWithNumberThree)];
-//        
-//        button;
-//    });
-    
     self.numberOfTabs = 2;   ///////当设置数量时，去调用setter方法去加载控件
     
 }
@@ -82,12 +76,14 @@
     return label;
 }
 
--(UIViewController *)tabContainer:(TabContainerViewController *)tabContainer contentViewControllerForTabAtIndex:(NSUInteger)index {
-    ContentViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"ContentViewController"];
-    
-    cvc.labelString = [NSString stringWithFormat:@"Content View #%ld", index];
-    
-    return cvc;
+-(UIViewController *)tabContainer:(TabContainerViewController *)tabContainer contentViewControllerForTabAtIndex:(NSUInteger)index{
+    if (index == 0) {
+        StaffViewController *cvc = [[StaffViewController alloc] init];
+        return cvc;
+    }else{
+        WorkTypeViewController *cvc = [[WorkTypeViewController alloc] init];
+        return cvc;
+    }
 }
 
 
@@ -101,7 +97,7 @@
         case TabContainerIndicator:
             return [RGB(17, 157, 255) colorWithAlphaComponent:1];
         case TabContainerTabsView:
-            return [[UIColor blackColor] colorWithAlphaComponent:0.9];
+            return [[UIColor blackColor] colorWithAlphaComponent:1];
         case TabContainerContent:
             return [[UIColor whiteColor] colorWithAlphaComponent:1];
         default:

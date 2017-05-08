@@ -13,6 +13,7 @@
 //app配置
 #import "Config_DT.h"
 #import "NetAPI_DT.h"
+#import "Tools.h"
 ////app工具
 #import "DTNetManger.h"
 #import "OpenUDID.h"

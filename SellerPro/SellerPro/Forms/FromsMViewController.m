@@ -7,7 +7,12 @@
 //
 
 #import "FromsMViewController.h"
-#import "ContentViewController.h"
+#import "FPPopoverController.h"
+#import "TimeViewController.h"
+#import "SFormViewController.h"
+#import "PersionViewController.h"
+#import "ProgramViewController.h"
+
 @interface FromsMViewController () <TabContainerDelegate,TabContainerDataSource>
 @property (nonatomic) NSUInteger numberOfTabs;
 @end
@@ -21,14 +26,12 @@
     [self setLeftBackNavItem];
     self.title = @"业绩报表";
     self.numberOfTabs = 3;   ///////当设置数量时，去调用setter方法去加载控件
-    self.navigationItem.rightBarButtonItem = ({
-    
-            UIBarButtonItem *button;
-            button = [[UIBarButtonItem alloc] initWithTitle:@"选择" style:UIBarButtonItemStylePlain target:self action:@selector(select)];
-    
-            button;
-        });
-    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"12月" forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"home_btn_dropdown"] forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 60, 44);
+    [btn addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
 
 - (void)setNumberOfTabs:(NSUInteger)numberOfTabs {
@@ -80,22 +83,31 @@
 
     
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor blackColor];
+    label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     
     return label;
 }
 
 -(UIViewController *)tabContainer:(TabContainerViewController *)tabContainer contentViewControllerForTabAtIndex:(NSUInteger)index {
-    ContentViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"ContentViewController"];
-    
-    cvc.labelString = [NSString stringWithFormat:@"Content View #%ld", index];
-    
-    return cvc;
+    if (index == 0) {
+        SFormViewController *cvc = [[SFormViewController alloc] init];
+        return cvc;
+    }else if (index == 1){
+        PersionViewController *cvc = [[PersionViewController alloc] init];
+        return cvc;
+    }else{
+        ProgramViewController *cvc = [[ProgramViewController alloc] init];
+        return cvc;
+    }
 }
 #pragma mark -- private method
-- (void)select{
-    
+- (void)select:(UIButton*)sender{
+    TimeViewController *vc = [[TimeViewController alloc]init];
+    FPPopoverController*popover = [[FPPopoverController alloc] initWithViewController:vc];
+    popover.contentSize = CGSizeMake(200, 300);
+    popover.arrowDirection = UIMenuControllerArrowUp;
+    [popover presentPopoverFromView:sender];
 }
 
 #pragma mark --TabContainerDelegate
@@ -108,9 +120,9 @@
         case TabContainerIndicator:
             return [RGB(17, 157, 255) colorWithAlphaComponent:1];
         case TabContainerTabsView:
-            return [[UIColor whiteColor] colorWithAlphaComponent:0.32];
+            return [[UIColor blackColor] colorWithAlphaComponent:1];
         case TabContainerContent:
-            return [[UIColor darkGrayColor] colorWithAlphaComponent:0.32];
+            return [[UIColor whiteColor] colorWithAlphaComponent:1];
         default:
             return color;
     }
