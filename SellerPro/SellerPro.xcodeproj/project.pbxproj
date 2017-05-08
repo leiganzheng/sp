@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1617993583E4AB4E60AF41B6 /* libPods-SellerPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 859766395445D2D4A9B2BC20 /* libPods-SellerPro.a */; };
 		7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED3A1EBEE84800C542AC /* MainViewController.m */; };
 		7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED3E1EBEE8BC00C542AC /* DTBaseViewController.m */; };
 		7109ED421EBEEA7B00C542AC /* DTMyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED411EBEEA7B00C542AC /* DTMyTableViewCell.m */; };
@@ -24,12 +25,10 @@
 		710FEF661EBEE23D0064CC85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 710FEF641EBEE23D0064CC85 /* LaunchScreen.storyboard */; };
 		71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */; };
 		71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */; };
-		EA431E795B5D534C1C01CBE6 /* libPods-SellerPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8631A9C80DA048836E1903F7 /* libPods-SellerPro.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		07580AFF31541BC5F6B27B9E /* Pods-SellerPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.debug.xcconfig"; sourceTree = "<group>"; };
-		64B4C7FA667C7E42AECA154D /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
+		3C97A5594A9A2833D5A07DF6 /* Pods-SellerPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.debug.xcconfig"; sourceTree = "<group>"; };
 		7109ED391EBEE84800C542AC /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7109ED3A1EBEE84800C542AC /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7109ED3D1EBEE8BC00C542AC /* DTBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBaseViewController.h; sourceTree = "<group>"; };
@@ -65,7 +64,8 @@
 		71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabContainerViewController.m; sourceTree = "<group>"; };
 		71AA0ED01EBF68E400D2ADD3 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
-		8631A9C80DA048836E1903F7 /* libPods-SellerPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SellerPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		859766395445D2D4A9B2BC20 /* libPods-SellerPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SellerPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA431E795B5D534C1C01CBE6 /* libPods-SellerPro.a in Frameworks */,
+				1617993583E4AB4E60AF41B6 /* libPods-SellerPro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +148,8 @@
 			children = (
 				710FEF551EBEE23C0064CC85 /* SellerPro */,
 				710FEF541EBEE23C0064CC85 /* Products */,
-				7219647B69B249C723AB4CA5 /* Pods */,
-				C675810111E552899D69E257 /* Frameworks */,
+				B6BC153CAF114EC745A2E32F /* Pods */,
+				7E80E657977CEB65A10D665D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -203,21 +203,21 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		7219647B69B249C723AB4CA5 /* Pods */ = {
+		7E80E657977CEB65A10D665D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				07580AFF31541BC5F6B27B9E /* Pods-SellerPro.debug.xcconfig */,
-				64B4C7FA667C7E42AECA154D /* Pods-SellerPro.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		C675810111E552899D69E257 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8631A9C80DA048836E1903F7 /* libPods-SellerPro.a */,
+				859766395445D2D4A9B2BC20 /* libPods-SellerPro.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B6BC153CAF114EC745A2E32F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C97A5594A9A2833D5A07DF6 /* Pods-SellerPro.debug.xcconfig */,
+				D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,12 +227,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 710FEF6A1EBEE23D0064CC85 /* Build configuration list for PBXNativeTarget "SellerPro" */;
 			buildPhases = (
-				A00E85C82F513EA86107C702 /* Check Pods Manifest.lock */,
+				3315A4404852BC2E6E1878C9 /* [CP] Check Pods Manifest.lock */,
 				710FEF4F1EBEE23C0064CC85 /* Sources */,
 				710FEF501EBEE23C0064CC85 /* Frameworks */,
 				710FEF511EBEE23C0064CC85 /* Resources */,
-				E08DC973B09F28E140F49920 /* Embed Pods Frameworks */,
-				6F5B5762681B379937FB6EBC /* Copy Pods Resources */,
+				35BD2E3F500097419D8432AE /* [CP] Embed Pods Frameworks */,
+				31CD0D6D2F180EA51CCEBEE5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -289,14 +289,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6F5B5762681B379937FB6EBC /* Copy Pods Resources */ = {
+		31CD0D6D2F180EA51CCEBEE5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,29 +304,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A00E85C82F513EA86107C702 /* Check Pods Manifest.lock */ = {
+		3315A4404852BC2E6E1878C9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E08DC973B09F28E140F49920 /* Embed Pods Frameworks */ = {
+		35BD2E3F500097419D8432AE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,7 +464,7 @@
 		};
 		710FEF6B1EBEE23D0064CC85 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07580AFF31541BC5F6B27B9E /* Pods-SellerPro.debug.xcconfig */;
+			baseConfigurationReference = 3C97A5594A9A2833D5A07DF6 /* Pods-SellerPro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SellerPro/Config/PrefixHeader_DT.pch";
@@ -478,7 +478,7 @@
 		};
 		710FEF6C1EBEE23D0064CC85 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64B4C7FA667C7E42AECA154D /* Pods-SellerPro.release.xcconfig */;
+			baseConfigurationReference = D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SellerPro/Config/PrefixHeader_DT.pch";

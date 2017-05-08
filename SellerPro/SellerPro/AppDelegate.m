@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-
 @interface AppDelegate ()
 
 @end
@@ -21,23 +20,51 @@
     navBar.barStyle = UIBarStyleBlack;
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] , NSFontAttributeName:DT_Nav_TitleFont}];
     navBar.barTintColor = [UIColor blackColor];
-//    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-
+    [self setUpBaseNetwork];
     return YES;
 }
 - (void)setUpBaseNetwork
 {
-//    [[AFNetworkReachabilityManager sharedManager] startMonitoring]; //检测网络
-//    [HYBNetworking updateBaseUrl:kDTBaseHostUrl];                   //默认hostUrl
-//    [HYBNetworking configRequestType:kHYBRequestTypePlainText       //请求类型 数据类型 Encode Url
-//                        responseType:kHYBResponseTypeJSON
-//                 shouldAutoEncodeUrl:YES
-//             callbackOnCancelRequest:NO];
-//    [HYBNetworking enableInterfaceDebug:NO];                        //是否开启debug模式
-//    [HYBNetworking obtainDataFromLocalWhenNetworkUnconnected:YES];  //网络异常时本地获取数据
-//    [HYBNetworking cacheGetRequest:YES shoulCachePost:YES];         //数据缓存
-//    [HYBNetworking setTimeout:20.f];                                //超时回调
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring]; //检测网络
+    [HYBNetworking updateBaseUrl:kDTBaseHostUrl];                   //默认hostUrl
+    [HYBNetworking configRequestType:kHYBRequestTypePlainText       //请求类型 数据类型 Encode Url
+                        responseType:kHYBResponseTypeJSON
+                 shouldAutoEncodeUrl:YES
+             callbackOnCancelRequest:NO];
+    [HYBNetworking enableInterfaceDebug:NO];                        //是否开启debug模式
+    [HYBNetworking obtainDataFromLocalWhenNetworkUnconnected:YES];  //网络异常时本地获取数据
+    [HYBNetworking cacheGetRequest:YES shoulCachePost:YES];         //数据缓存
+    [HYBNetworking setTimeout:20.f];                                //超时回调
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"client-type", @"ios",
+                          @"client-imei", OpenUDID.value,
+                          @"client-version", @"1.0",
+                          @"timestamp", [self timeStamp],
+                          @"signature", @"",
+                          @"token",@"",
+                          @"refresh-token",@"",
+                          nil];
+    [HYBNetworking configCommonHttpHeaders:dic];
 
+}
+-(NSString*)timeStamp{
+    NSDate *senddate = [NSDate date];
+    
+    NSLog(@"date1时间戳 = %ld",time(NULL));
+    NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
+    NSLog(@"date2时间戳 = %@",date2);
+    
+    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSString *date1 = [dateformatter stringFromDate:senddate];
+    NSLog(@"获取当前时间   = %@",date1);
+    
+    // 时间戳转时间
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[senddate timeIntervalSince1970]];
+    NSString *confromTimespStr = [dateformatter stringFromDate:confromTimesp];
+    NSLog(@"时间戳转时间   = %@",confromTimespStr);
+    return confromTimespStr;
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -12,9 +12,10 @@
 #import <UIKit/UIKit.h>
 //app配置
 #import "Config_DT.h"
-//#import "NetAPI_DT.h"
+#import "NetAPI_DT.h"
 ////app工具
-//#import "DTNetManger.h"
+#import "DTNetManger.h"
+#import "OpenUDID.h"
 //#import "DTBaseModel.h"
 //#import "NSURL+DT_Ex.h"
 //#import "UIView+DT_Ex.h"
@@ -35,7 +36,7 @@
 //#import "MJExtension.h"
 #import "AFNetworking.h"
 #import "HYBNetworking.h"
-//#import "MBProgressHUD.h"
+#import "MBProgressHUD.h"
 //#import "SDWebImageManager.h"
 //#import <SDWebImage/UIImage+GIF.h>
 //#import <SDWebImage/UIImageView+WebCache.h>
