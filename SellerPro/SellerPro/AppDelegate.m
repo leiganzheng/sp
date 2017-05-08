@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <CommonCrypto/CommonDigest.h>
+
 @interface AppDelegate ()
 
 @end
@@ -40,15 +42,15 @@
                           @"client-type", @"ios",
                           @"client-imei", OpenUDID.value,
                           @"client-version", @"1.0",
-                          @"timestamp", [self timeStamp],
-                          @"signature", @"",
+                          @"timestamp", [self timeStamp:YES],
+                          @"signature", [self signature],
                           @"token",@"",
                           @"refresh-token",@"",
                           nil];
     [HYBNetworking configCommonHttpHeaders:dic];
 
 }
--(NSString*)timeStamp{
+-(NSString*)timeStamp:(BOOL)flag{
     NSDate *senddate = [NSDate date];
     
     NSLog(@"date1时间戳 = %ld",time(NULL));
@@ -64,8 +66,37 @@
     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[senddate timeIntervalSince1970]];
     NSString *confromTimespStr = [dateformatter stringFromDate:confromTimesp];
     NSLog(@"时间戳转时间   = %@",confromTimespStr);
-    return confromTimespStr;
+    if (flag) {
+        if (confromTimespStr.length >10) {
+            return [confromTimespStr substringToIndex:10];
+        }
+        return confromTimespStr;
+    }else{
+         return confromTimespStr;
+    }
 }
+-(NSString*)signature{
+//    merchant_ios
+    NSString * str = [NSString stringWithFormat:@"%@%@", @"merchant_ios", [self timeStamp:NO]];
+    //sha1
+    const char *cstr = [str cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    NSData *data = [NSData dataWithBytes:cstr length:str.length];
+    //使用对应的CC_SHA1,CC_SHA256,CC_SHA384,CC_SHA512的长度分别是20,32,48,64
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    //使用对应的CC_SHA256,CC_SHA384,CC_SHA512
+    CC_SHA1(data.bytes, data.length, digest);
+    
+    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    if (output.length >40) {
+        return [output substringToIndex:40];
+    }
+    return output;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
