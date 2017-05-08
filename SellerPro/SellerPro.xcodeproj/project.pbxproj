@@ -25,6 +25,9 @@
 		710FEF661EBEE23D0064CC85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 710FEF641EBEE23D0064CC85 /* LaunchScreen.storyboard */; };
 		71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */; };
 		71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */; };
+		BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4391EC05A5E00D67843 /* FPPopoverController.m */; };
+		BB87F43F1EC05A5E00D67843 /* FPPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */; };
+		BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43D1EC05A5E00D67843 /* FPTouchView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +68,13 @@
 		71AA0ED01EBF68E400D2ADD3 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		859766395445D2D4A9B2BC20 /* libPods-SellerPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SellerPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB87F4371EC05A5E00D67843 /* ARCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacros.h; sourceTree = "<group>"; };
+		BB87F4381EC05A5E00D67843 /* FPPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverController.h; sourceTree = "<group>"; };
+		BB87F4391EC05A5E00D67843 /* FPPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverController.m; sourceTree = "<group>"; };
+		BB87F43A1EC05A5E00D67843 /* FPPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverView.h; sourceTree = "<group>"; };
+		BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverView.m; sourceTree = "<group>"; };
+		BB87F43C1EC05A5E00D67843 /* FPTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTouchView.h; sourceTree = "<group>"; };
+		BB87F43D1EC05A5E00D67843 /* FPTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTouchView.m; sourceTree = "<group>"; };
 		D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +174,7 @@
 		710FEF551EBEE23C0064CC85 /* SellerPro */ = {
 			isa = PBXGroup;
 			children = (
+				BB87F4351EC05A5E00D67843 /* Lib */,
 				7109ED591EBF4CB200C542AC /* DTNetManger */,
 				7109ED4F1EBEF20900C542AC /* Login */,
 				7109ED431EBEF0F300C542AC /* Employee */,
@@ -218,6 +229,28 @@
 				D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		BB87F4351EC05A5E00D67843 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				BB87F4361EC05A5E00D67843 /* FPPopover */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		BB87F4361EC05A5E00D67843 /* FPPopover */ = {
+			isa = PBXGroup;
+			children = (
+				BB87F4371EC05A5E00D67843 /* ARCMacros.h */,
+				BB87F4381EC05A5E00D67843 /* FPPopoverController.h */,
+				BB87F4391EC05A5E00D67843 /* FPPopoverController.m */,
+				BB87F43A1EC05A5E00D67843 /* FPPopoverView.h */,
+				BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */,
+				BB87F43C1EC05A5E00D67843 /* FPTouchView.h */,
+				BB87F43D1EC05A5E00D67843 /* FPTouchView.m */,
+			);
+			path = FPPopover;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,14 +378,17 @@
 				7109ED5D1EBF4CB200C542AC /* DTNetManger.m in Sources */,
 				7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */,
 				7109ED4E1EBEF1AA00C542AC /* ServiceViewController.m in Sources */,
+				BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */,
 				7109ED481EBEF11300C542AC /* EmployeeViewController.m in Sources */,
 				71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */,
+				BB87F43F1EC05A5E00D67843 /* FPPopoverView.m in Sources */,
 				710FEF581EBEE23C0064CC85 /* main.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
 				7109ED421EBEEA7B00C542AC /* DTMyTableViewCell.m in Sources */,
 				7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */,
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
+				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,
 				7109ED4B1EBEF16500C542AC /* FromsMViewController.m in Sources */,
 			);

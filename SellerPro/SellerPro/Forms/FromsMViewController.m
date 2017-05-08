@@ -20,15 +20,6 @@
     self.delegate = self;
     [self setLeftBackNavItem];
     self.title = @"业绩报表";
-    
-    //    self.navigationItem.rightBarButtonItem = ({
-    //
-    //        UIBarButtonItem *button;
-    //        button = [[UIBarButtonItem alloc] initWithTitle:@"Tab #3" style:UIBarButtonItemStylePlain target:self action:@selector(selectTabWithNumberThree)];
-    //
-    //        button;
-    //    });
-    
     self.numberOfTabs = 3;   ///////当设置数量时，去调用setter方法去加载控件
     
 }
