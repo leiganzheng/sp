@@ -12,4 +12,5 @@
 
 @property (nonatomic, strong) UIImageView *iconView;
 @property (nonatomic, strong) UILabel     *titleLabel;
+@property (nonatomic, strong) UIView     *bgView;
 @end

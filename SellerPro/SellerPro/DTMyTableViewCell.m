@@ -27,11 +27,23 @@
     }
     return _titleLabel;
 }
+- (UIView *)bgView
+{
+    if (!_bgView) {
+        _bgView = [[UIView alloc] init];
+        _bgView.backgroundColor = [UIColor whiteColor];
+        _bgView.layer.masksToBounds = YES;
+        _bgView.layer.cornerRadius = 5;
+        _bgView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        _bgView.layer.borderWidth = 1;
+    }
+    return _bgView;
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        [self.contentView addSubview:self.bgView];
         [self.contentView addSubview:self.iconView];
         [self.contentView addSubview:self.titleLabel];
     }
@@ -40,6 +52,13 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.contentView).with.offset(4);
+        make.centerY.equalTo(self.contentView);
+        make.size.mas_equalTo(CGSizeMake(KSCREEN_WIDTH, 100));
+    }];
+    
     [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.contentView).with.offset(20);
