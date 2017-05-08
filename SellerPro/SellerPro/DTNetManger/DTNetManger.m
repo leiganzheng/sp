@@ -27,4 +27,18 @@
 + (void)getSearchLisWithKeyWord:(NSString *)keyW PageNum:(NSInteger)pageNum pageSize:(NSInteger)pageSize callBack:(callBack)callBack{
     
 }
++(void)loginWith:(NSString *)iphone PW:(NSString*)passWord callBack:(callBack)callBack{
+   [HYBNetworking getWithUrl:kDTLoginUrl refreshCache:YES success:^(id response) {
+       NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+       if (code) {
+           if (callBack) {
+               callBack(nil,response);
+           }
+       }else{
+           [DTNetManger requestFailedCallBack:callBack];
+       }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+}
 @end

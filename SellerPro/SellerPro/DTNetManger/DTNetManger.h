@@ -18,5 +18,9 @@ typedef void(^detailCallBack) (NSError *error, NSArray *response, DTBaseModel *d
                           PageNum:(NSInteger)pageNum
                           pageSize:(NSInteger)pageSize
                           callBack:(callBack)callBack;
++(void)loginWith:(NSString*)iphone
+            PW:(NSString*)passWord
+            callBack:(callBack)callBack;
+
 
 @end

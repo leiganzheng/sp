@@ -11,5 +11,5 @@
 
 #define kDTBaseHostUrl                  @"http://120.77.149.156:92"
 
-
+#define kDTLoginUrl                  @"Merchant/login"
 #endif /* NetAPI_DT_h */

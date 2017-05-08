@@ -24,6 +24,9 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)loginAction:(id)sender {
+    [DTNetManger loginWith:@"18682242936" PW:@"111" callBack:^(NSError *error, NSArray *response) {
+        
+    }];
 }
 - (IBAction)forgetPW:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
