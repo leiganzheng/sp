@@ -28,7 +28,11 @@
     
 }
 +(void)loginWith:(NSString *)iphone PW:(NSString*)passWord callBack:(callBack)callBack{
-   [HYBNetworking getWithUrl:kDTLoginUrl refreshCache:YES success:^(id response) {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         iphone,@"phone",
+                         passWord,@"password",
+                         nil];
+    [HYBNetworking postWithUrl:kDTLoginUrl refreshCache:NO params:dic success:^(id response) {
        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
        if (code) {
            if (callBack) {

@@ -29,7 +29,7 @@
 {
     [[AFNetworkReachabilityManager sharedManager] startMonitoring]; //检测网络
     [HYBNetworking updateBaseUrl:kDTBaseHostUrl];                   //默认hostUrl
-    [HYBNetworking configRequestType:kHYBRequestTypePlainText       //请求类型 数据类型 Encode Url
+    [HYBNetworking configRequestType:kHYBRequestTypeJSON       //请求类型 数据类型 Encode Url
                         responseType:kHYBResponseTypeJSON
                  shouldAutoEncodeUrl:YES
              callbackOnCancelRequest:NO];
@@ -39,13 +39,13 @@
     [HYBNetworking setTimeout:20.f];                                //超时回调
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"client-type", @"ios",
-                          @"client-imei", OpenUDID.value,
-                          @"client-version", @"1.0",
-                          @"timestamp", [self timeStamp:YES],
-                          @"signature", [self signature],
-                          @"token",@"",
-                          @"refresh-token",@"",
+                          @"ios",@"client-type",
+                          OpenUDID.value,@"client-imei",
+                          @"1.0",@"client-version",
+                          [self timeStamp:YES], @"timestamp",
+                          [self signature],@"signature",
+                          @"", @"token",
+                          @"",@"refresh-token",
                           nil];
     [HYBNetworking configCommonHttpHeaders:dic];
 
@@ -64,15 +64,15 @@
     
     // 时间戳转时间
     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[senddate timeIntervalSince1970]];
-    NSString *confromTimespStr = [dateformatter stringFromDate:confromTimesp];
-    NSLog(@"时间戳转时间   = %@",confromTimespStr);
+//    NSString *confromTimespStr = [dateformatter stringFromDate:confromTimesp];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[confromTimesp timeIntervalSince1970]];  //    NSLog(@"时间戳转时间   = %@",confromTimespStr);
     if (flag) {
-        if (confromTimespStr.length >10) {
-            return [confromTimespStr substringToIndex:10];
+        if (timeSp.length >10) {
+            return [timeSp substringToIndex:10];
         }
-        return confromTimespStr;
+        return timeSp;
     }else{
-         return confromTimespStr;
+         return timeSp;
     }
 }
 -(NSString*)signature{
@@ -91,9 +91,9 @@
     
     for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
         [output appendFormat:@"%02x", digest[i]];
-    if (output.length >40) {
-        return [output substringToIndex:40];
-    }
+//    if (output.length >40) {
+//        return [output substringToIndex:40];
+//    }
     return output;
 }
 
