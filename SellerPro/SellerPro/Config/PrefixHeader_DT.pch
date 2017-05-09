@@ -39,6 +39,7 @@
 #import "AFNetworking.h"
 #import "HYBNetworking.h"
 #import "MBProgressHUD.h"
+#import "MBProgressHUD+Add.h"
 //#import "SDWebImageManager.h"
 //#import <SDWebImage/UIImage+GIF.h>
 //#import <SDWebImage/UIImageView+WebCache.h>

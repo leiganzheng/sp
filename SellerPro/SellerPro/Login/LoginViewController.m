@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "ForgetPWViewController.h"
 #import "MainViewController.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *login;
@@ -37,13 +38,20 @@
      [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 - (IBAction)loginAction:(id)sender {
-    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-    MainViewController *main = [board instantiateViewControllerWithIdentifier:@"MainViewController"];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:main];
-    [Tools enterRootViewController:nav animated:YES];
-//    [DTNetManger loginWith:@"18682242936" PW:@"123" callBack:^(NSError *error, NSArray *response) {
-//        
-//    }];
+    [DTNetManger loginWith:@"18682242936" PW:@"123" callBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dict = (NSDictionary *)response;
+            ((AppDelegate*)[UIApplication sharedApplication].delegate).token = dict[@"token"];
+            ((AppDelegate*)[UIApplication sharedApplication].delegate).rtoken = dict[@"refresh_token"];
+            //跳转
+            UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+            MainViewController *main = [board instantiateViewControllerWithIdentifier:@"MainViewController"];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:main];
+            [Tools enterRootViewController:nav animated:YES];
+        }else{
+            [MBProgressHUD showError:@"登录失败，请重试" toView:self.view];
+        }
+    }];
 }
 - (IBAction)forgetPW:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];

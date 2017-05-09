@@ -36,7 +36,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_dataSource) {
         _dataSource = @[@"员工姓名",@"联系方式",@"员工职位",@"就职状态",@"设置独立权限"];
-        _dataSource1 = @[@"物件",@"13545678907",@"洗车工",@"在职",@""];
+//        _dataSource1 = @[@"物件",@"13545678907",@"洗车工",@"在职",@""];
     }
     return _dataSource;
 }
@@ -86,6 +86,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 #pragma mark - private action
 -(void)save:(UIButton *)sender{
-    
+    [DTNetManger getStaffInfoWith:@"" callBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dict = (NSDictionary*)response;
+            _dataSource1 = @[[dict objectForKey:@"name"],[dict objectForKey:@"phone"],[dict objectForKey:@"work_type_id"],[dict objectForKey:@"is_disabled"],@""];
+                [_myTableView reloadData];
+        }else{
+            [MBProgressHUD showError:error.description toView:self.view];
+        }
+
+    }];
 }
 @end

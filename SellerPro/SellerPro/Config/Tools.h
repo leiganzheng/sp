@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface Tools : NSObject
+
 +(void)configCornerOfView:(UIView *)view with:(NSInteger)value;
 +(void)enterRootViewController:(UIViewController *)vc animated:(BOOL)animated;
++(void)configOrignNetWork;
 @end

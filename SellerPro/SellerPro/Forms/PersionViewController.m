@@ -32,13 +32,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-- (NSArray *)dataSource
-{
-    if (!_dataSource) {
-        _dataSource = @[@"吴建权",@"吴建权",@"吴建权",@"吴建权"];
-    }
-    return _dataSource;
-}
+//- (NSArray *)dataSource
+//{
+//    if (!_dataSource) {
+//        _dataSource = @[@"吴建权",@"吴建权",@"吴建权",@"吴建权"];
+//    }
+//    return _dataSource;
+//}
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
@@ -50,6 +50,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+    [self featchData];
 }
 
 #pragma mark - tableView Delegate
@@ -73,8 +74,25 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//   x SpersonTableViewCell *cell = (SpersonTableViewCell *)cell;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    SpersonTableViewCell *myCell = (SpersonTableViewCell*)cell;
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    myCell.name.text = [dict objectForKey:@"staff"];
+    myCell.price.text = [dict objectForKey:@"order_sum"];
+//    myCell.logoName.text = [dict objectForKey:@"work_type"];
 }
-
+-(void)featchData{
+    [DTNetManger orderStaffPageWith:@"1" size:@"10" date:@"2016-01" callBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)response;
+            if (arr.count>0) {
+                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
+                [_myTableView reloadData];
+            }else{
+                [MBProgressHUD showError:@"暂无数据" toView:self.view];
+            }
+        }else{
+            [MBProgressHUD showError:error.description toView:self.view];
+        }
+    }];
+}
 @end

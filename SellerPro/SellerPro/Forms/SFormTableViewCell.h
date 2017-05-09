@@ -1,5 +1,5 @@
 //
-//  SprogramTableViewCell.h
+//  SFormTableViewCell.h
 //  SellerPro
 //
 //  Created by leiganzheng on 2017/5/9.
@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SprogramTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *logo;
+@interface SFormTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *logoName;
 @property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *time;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
-@property (weak, nonatomic) IBOutlet UILabel *price;
 @end

@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 @class DTBaseModel;
 
-typedef void(^callBack)(NSError *error, NSArray *response);
+typedef void(^callBack)(NSError *error, id response);
 typedef void(^detailCallBack) (NSError *error, NSArray *response, DTBaseModel *detailModel);
 
 @interface DTNetManger : NSObject
+//@property(nonatomic,strong) NSString* token;
+//@property(nonatomic,strong) NSString* rtoken;
 //登录
 +(void)loginWith:(NSString*)iphone
             PW:(NSString*)passWord
@@ -31,63 +33,63 @@ typedef void(^detailCallBack) (NSError *error, NSArray *response, DTBaseModel *d
                   callBack:(callBack)callBack;
 
 //获取服务单分页
-+(void)orderPageWith:(NSInteger)page
-                       size:(NSInteger)size
++(void)orderPageWith:(NSString *)page
+                       size:(NSString *)size
                        date:(NSString*)date
                  callBack:(callBack)callBack;
 //获取员工业绩分页
-+(void)orderStaffPageWith:(NSInteger)page
-                     size:(NSInteger)size
++(void)orderStaffPageWith:(NSString *)page
+                     size:(NSString *)size
                      date:(NSString*)date
                  callBack:(callBack)callBack;
 //获取服务项目业绩分页
-+(void)orderServicePageWith:(NSInteger)page
-                     size:(NSInteger)size
++(void)orderServicePageWith:(NSString *)page
+                     size:(NSString *)size
                      date:(NSString*)date
                  callBack:(callBack)callBack;
 //获取工种列表
 +(void)workStypeListWithCallBack:(callBack)callBack;
 //获取工种注册地址
-+(void)getUrlOfWorkTypeWith:(NSInteger)typeId
++(void)getUrlOfWorkTypeWith:(NSString *)typeId
                     callBack:(callBack)callBack;
 //获取工种资料
-+(void)getUrlOfWorkInfoWith:(NSInteger)typeId
++(void)getUrlOfWorkInfoWith:(NSString *)typeId
                     callBack:(callBack)callBack;
 //添加/修改工种
-+(void)addWorkTypeWith:(NSInteger)typeId
++(void)addWorkTypeWith:(NSString *)typeId
                       name:(NSString*)name
                   callBack:(callBack)callBack;
 //删除工种
-+(void)delWorkTypeWith:(NSInteger)typeId
++(void)delWorkTypeWith:(NSString *)typeId
                     callBack:(callBack)callBack;
 //获取服务分类列表
 +(void)seviceListWithCallBack:(callBack)callBack;
 //获取服务项目资料
-+(void)getServiceInfoWith:(NSInteger)typeId
++(void)getServiceInfoWith:(NSString*)typeId
                    callBack:(callBack)callBack;
 //添加/修改服务项目
-+(void)addServiceWith:(NSInteger)service_id
-                 categoryId:(NSInteger)categoryId
++(void)addServiceWith:(NSString*)service_id
+                 categoryId:(NSString*)categoryId
                  name:(NSString*)name
-                  price:(float)price
+                  price:(NSString*)price
               callBack:(callBack)callBack;
 //删除服务项目
-+(void)delServiceTypeWith:(NSInteger)serviceId
++(void)delServiceTypeWith:(NSString*)serviceId
               callBack:(callBack)callBack;
 //获取员工分页
-+(void)StaffPageWith:(NSInteger)page
-                       size:(NSInteger)size
++(void)StaffPageWith:(NSString*)page
+                       size:(NSString*)size
                    callBack:(callBack)callBack;
 //获取员工资料
-+(void)getStaffInfoWith:(NSInteger)staffId
++(void)getStaffInfoWith:(NSString*)staffId
                  callBack:(callBack)callBack;
 //修改员工
-+(void)addStaffWith:(NSInteger)staff_id
-           work_type_id:(NSInteger)work_type_id
-                 name:(NSString*)name
-                is_disabled:(NSInteger)is_disabled //状态(0->在职，1->离职)
++(void)addStaffWith:(NSString*)staff_id
+       work_type_id:(NSString*)work_type_id
+               name:(NSString*)name
+        is_disabled:(NSString*)is_disabled //状态(0->在职，1->离职)
              callBack:(callBack)callBack;
 //删除员工
-+(void)delStaffInfoWith:(NSInteger)staffId
++(void)delStaffInfoWith:(NSString*)staffId
                callBack:(callBack)callBack;
 @end

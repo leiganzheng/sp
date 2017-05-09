@@ -24,7 +24,6 @@
 #define kDTGetUrlUrl                 @"WorkType/getUrl"
 #define kDTGetInfoUrl                @"WorkType/get"
 #define kDTsaveUrl                   @"WorkType/save"
-#define kDTsaveUrl                   @"WorkType/save"
 #define kDTdelUrl                    @"WorkType/del"
 //Service
 #define kDTgetCategoryListUrl        @"Service/getCategoryList"

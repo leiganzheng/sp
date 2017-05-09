@@ -26,15 +26,17 @@
 }
 //登录
 +(void)loginWith:(NSString *)iphone PW:(NSString*)passWord callBack:(callBack)callBack{
+    [Tools configOrignNetWork];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                          iphone,@"phone",
                          passWord,@"password",
                          nil];
-    [HYBNetworking postWithUrl:kDTLoginUrl refreshCache:NO params:dic success:^(id response) {
+    [HYBNetworking postWithUrl:kDTLoginUrl refreshCache:YES params:dic success:^(id response) {
        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
-       if (code) {
+       if (code.integerValue == 0) {
            if (callBack) {
-               callBack(nil,response);
+               NSDictionary *dic = [(NSDictionary*)response objectForKey:@"data"];
+               callBack(nil,dic);
            }
        }else{
            [DTNetManger requestFailedCallBack:callBack];
@@ -48,7 +50,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                          phone,@"phone",
                          nil];
-    [HYBNetworking postWithUrl:kDVerifyCodeUrl refreshCache:NO params:dic success:^(id response) {
+    [HYBNetworking postWithUrl:kDVerifyCodeUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code) {
             if (callBack) {
@@ -68,7 +70,7 @@
                          phone,@"phone",
                          verifyCode,@"verify_code",
                          nil];
-    [HYBNetworking postWithUrl:kDTCheckVerifyCodeUrl refreshCache:NO params:dic success:^(id response) {
+    [HYBNetworking postWithUrl:kDTCheckVerifyCodeUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code) {
             if (callBack) {
@@ -89,7 +91,7 @@
                          passWord,@"password",
                          verifyCode,@"verify_code",
                          nil];
-    [HYBNetworking postWithUrl:kDTMpasswordUrl refreshCache:NO params:dic success:^(id response) {
+    [HYBNetworking postWithUrl:kDTMpasswordUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code) {
             if (callBack) {
@@ -104,89 +106,367 @@
 
 }
 //获取服务单分页
-+(void)orderPageWith:(NSInteger)page size:(NSInteger)size date:(NSString *)date callBack:(callBack)callBack{
-    
++(void)orderPageWith:(NSString *)page size:(NSString *)size date:(NSString *)date callBack:(callBack)callBack{
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         page,@"page",
+                         size,@"size",
+                         date,@"date",
+                         nil];
+    [HYBNetworking postWithUrl:kDTGetPageUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //获取员工业绩分页
-+(void)orderStaffPageWith:(NSInteger)page size:(NSInteger)size date:(NSString *)date callBack:(callBack)callBack{
-    
++(void)orderStaffPageWith:(NSString *)page size:(NSString *)size date:(NSString *)date callBack:(callBack)callBack{
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         page,@"page",
+                         size,@"size",
+                         date,@"date",
+                         nil];
+    [HYBNetworking postWithUrl:kDTGetStaffPageUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //获取服务项目业绩分页
-+(void)orderServicePageWith:(NSInteger)page
-                       size:(NSInteger)size
++(void)orderServicePageWith:(NSString *)page
+                       size:(NSString *)size
                        date:(NSString*)date
                    callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         page,@"page",
+                         size,@"size",
+                         date,@"date",
+                         nil];
+    [HYBNetworking postWithUrl:kDTGetServicePageUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //获取工种列表
 +(void)workStypeListWithCallBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    [HYBNetworking postWithUrl:kDTGetListUrl refreshCache:YES params:nil success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //获取工种注册地址
-+(void)getUrlOfWorkTypeWith:(NSInteger)typeId
++(void)getUrlOfWorkTypeWith:(NSString *)typeId
                    callBack:(callBack)callBack{
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         typeId,@"work_type_id",
+                         nil];
+    [HYBNetworking postWithUrl:kDTGetUrlUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
     
 }
 //获取工种资料
-+(void)getUrlOfWorkInfoWith:(NSInteger)typeId
++(void)getUrlOfWorkInfoWith:(NSString *)typeId
                    callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         typeId,@"work_type_id",
+                         nil];
+    [HYBNetworking postWithUrl:kDTGetInfoUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //添加/修改工种
-+(void)addWorkTypeWith:(NSInteger)typeId
++(void)addWorkTypeWith:(NSString *)typeId
                   name:(NSString*)name
               callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         typeId,@"work_type_id",
+                         name,@"name",
+                         nil];
+    [HYBNetworking postWithUrl:kDTsaveUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //删除工种
-+(void)delWorkTypeWith:(NSInteger)typeId
++(void)delWorkTypeWith:(NSString *)typeId
               callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         typeId,@"work_type_id",
+                         nil];
+    [HYBNetworking postWithUrl:kDTdelUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                
+                callBack(nil,nil);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //获取服务分类列表
 +(void)seviceListWithCallBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    [HYBNetworking postWithUrl:kDTgetCategoryListUrl refreshCache:YES params:nil success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //获取服务项目资料
-+(void)getServiceInfoWith:(NSInteger)typeId
++(void)getServiceInfoWith:(NSString*)typeId
                  callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         typeId,@"work_type_id",
+                         nil];
+    [HYBNetworking postWithUrl:kDTGetSInfoUrlUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //添加/修改服务项目
-+(void)addServiceWith:(NSInteger)service_id
-           categoryId:(NSInteger)categoryId
++(void)addServiceWith:(NSString*)service_id
+           categoryId:(NSString*)categoryId
                  name:(NSString*)name
-                price:(float)price
+                price:(NSString*)price
              callBack:(callBack)callBack{
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         service_id,@"service_id",
+                         categoryId,@"category_id",
+                         name,@"name",
+                         price,@"is_disabled",
+                         nil];
+    [HYBNetworking postWithUrl:kDTSsaveUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                callBack(nil,nil);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
     
 }
 //删除服务项目
-+(void)delServiceTypeWith:(NSInteger)serviceId
++(void)delServiceTypeWith:(NSString*)serviceId
                  callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         serviceId,@"service_id",
+                         nil];
+    [HYBNetworking postWithUrl:kDTStaffdelUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                
+                callBack(nil,nil);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //获取员工分页
-+(void)StaffPageWith:(NSInteger)page
-                size:(NSInteger)size
++(void)StaffPageWith:(NSString*)page
+                size:(NSString*)size
             callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         page,@"page",
+                         size,@"size",
+                         nil];
+    [HYBNetworking postWithUrl:kDTStaffgetPageUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //获取员工资料
-+(void)getStaffInfoWith:(NSInteger)staffId
++(void)getStaffInfoWith:(NSString*)staffId
                callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         staffId,@"staff_id",
+                         nil];
+    [HYBNetworking postWithUrl:kDTStaffGetInfoUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,arr);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
+
 }
 //修改员工
-+(void)addStaffWith:(NSInteger)staff_id
-       work_type_id:(NSInteger)work_type_id
++(void)addStaffWith:(NSString*)staff_id
+       work_type_id:(NSString*)work_type_id
                name:(NSString*)name
-        is_disabled:(NSInteger)is_disabled //状态(0->在职，1->离职)
+        is_disabled:(NSString*)is_disabled //状态(0->在职，1->离职)
            callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         staff_id,@"staff_id",
+                         work_type_id,@"work_type_id",
+                         name,@"name",
+                         is_disabled,@"is_disabled",
+                         nil];
+    [HYBNetworking postWithUrl:kDTStaffsaveUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+                callBack(nil,nil);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
 }
 //删除员工
-+(void)delStaffInfoWith:(NSInteger)staffId
++(void)delStaffInfoWith:(NSString*)staffId
                callBack:(callBack)callBack{
-    
+    [Tools configOrignNetWork];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         staffId,@"staff_id",
+                         nil];
+    [HYBNetworking postWithUrl:kDTStaffdelUrl refreshCache:YES params:dic success:^(id response) {
+        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
+        if (code.integerValue == 0) {
+            if (callBack) {
+               
+                callBack(nil,nil);
+            }
+        }else{
+            [DTNetManger requestFailedCallBack:callBack];
+        }
+    } fail:^(NSError *error) {
+        [DTNetManger requestFailedCallBack:callBack];
+    }];
 }
 @end

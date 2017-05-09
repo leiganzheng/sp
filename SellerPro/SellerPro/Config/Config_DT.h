@@ -9,8 +9,6 @@
 #ifndef Config_DT_h
 #define Config_DT_h
 
-
-
 #define kAppName                  @"商家"
 #define kAppUrl                   @""
 

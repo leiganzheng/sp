@@ -7,7 +7,7 @@
 //
 
 #import "SFormViewController.h"
-#import "DTMyTableViewCell.h"
+#import "SFormTableViewCell.h"
 
 @interface SFormViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,19 +23,19 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 100;
+        _myTableView.rowHeight = 90;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = DT_Base_LineColor;
-        [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+       [_myTableView registerNib:[UINib nibWithNibName:@"SFormTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@"抛光打蜡",@"员工管理",@"服务项目",@"密码设置"];
+        _dataSource = @[@[@"抛光打蜡",@"员工管理",@"服务项目",@"密码设置"],@[@"抛光打蜡",@"员工管理"]];
     }
     return _dataSource;
 }
@@ -50,36 +50,59 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+//    [self featchData];
 }
 
 #pragma mark - tableView Delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.dataSource.count;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    return ((NSArray*)self.dataSource[section]).count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 4;
+    if (section == 0) {
+        return 0.01;
+    }
+    return 40;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01;
 }
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section ==0) {
+        return  @"";
+    }else{
+        return @"-----昨天------";
+    }
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    SFormTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *myCell = (DTMyTableViewCell *)cell;
-    myCell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    myCell.titleLabel.textColor = DT_Base_TitleColor;
-    myCell.iconView.hidden = NO;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
-    myCell.titleLabel.text = self.dataSource[indexPath.row];
+}
+-(void)featchData{
+    [DTNetManger orderPageWith:@"1" size:@"10" date:@"2016-01" callBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)response;
+            if (arr.count>0) {
+                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
+                [_myTableView reloadData];
+            }else{
+                [MBProgressHUD showError:@"暂无数据" toView:self.view];
+            }
+        }else{
+            [MBProgressHUD showError:error.description toView:self.view];
+        }
+
+    }];
 }
 @end

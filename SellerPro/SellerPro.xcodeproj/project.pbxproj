@@ -43,6 +43,9 @@
 		BB87F4511EC1709500D67843 /* SpersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F44F1EC1709500D67843 /* SpersonTableViewCell.xib */; };
 		BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */; };
 		BB87F4561EC1722100D67843 /* SprogramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */; };
+		BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4581EC173F700D67843 /* SFormTableViewCell.m */; };
+		BB87F45B1EC173F700D67843 /* SFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */; };
+		BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +120,11 @@
 		BB87F4521EC1722100D67843 /* SprogramTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SprogramTableViewCell.h; sourceTree = "<group>"; };
 		BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SprogramTableViewCell.m; sourceTree = "<group>"; };
 		BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SprogramTableViewCell.xib; sourceTree = "<group>"; };
+		BB87F4571EC173F700D67843 /* SFormTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFormTableViewCell.h; sourceTree = "<group>"; };
+		BB87F4581EC173F700D67843 /* SFormTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFormTableViewCell.m; sourceTree = "<group>"; };
+		BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFormTableViewCell.xib; sourceTree = "<group>"; };
+		BB87F45D1EC18E8200D67843 /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
+		BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +190,9 @@
 				BB87F4521EC1722100D67843 /* SprogramTableViewCell.h */,
 				BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */,
 				BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */,
+				BB87F4571EC173F700D67843 /* SFormTableViewCell.h */,
+				BB87F4581EC173F700D67843 /* SFormTableViewCell.m */,
+				BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -303,6 +314,7 @@
 		BB87F4351EC05A5E00D67843 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				BB87F45C1EC18E8200D67843 /* MBProgressHUD */,
 				BB87F4361EC05A5E00D67843 /* FPPopover */,
 			);
 			path = Lib;
@@ -320,6 +332,15 @@
 				BB87F43D1EC05A5E00D67843 /* FPTouchView.m */,
 			);
 			path = FPPopover;
+			sourceTree = "<group>";
+		};
+		BB87F45C1EC18E8200D67843 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BB87F45D1EC18E8200D67843 /* MBProgressHUD+Add.h */,
+				BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +405,7 @@
 			files = (
 				710FEF661EBEE23D0064CC85 /* LaunchScreen.storyboard in Resources */,
 				BB87F4511EC1709500D67843 /* SpersonTableViewCell.xib in Resources */,
+				BB87F45B1EC173F700D67843 /* SFormTableViewCell.xib in Resources */,
 				BB87F4561EC1722100D67843 /* SprogramTableViewCell.xib in Resources */,
 				BB87F44C1EC16A1D00D67843 /* EmployeeTableViewCell.xib in Resources */,
 				710FEF631EBEE23D0064CC85 /* Assets.xcassets in Resources */,
@@ -465,6 +487,7 @@
 				710FEF581EBEE23C0064CC85 /* main.m in Sources */,
 				71322E391EC09F0D003E0D23 /* Tools.m in Sources */,
 				BB87F4501EC1709500D67843 /* SpersonTableViewCell.m in Sources */,
+				BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
 				BB87F4431EC05D2500D67843 /* TimeViewController.m in Sources */,
@@ -472,6 +495,7 @@
 				7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */,
 				BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */,
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
+				BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,
 				7109ED4B1EBEF16500C542AC /* FromsMViewController.m in Sources */,

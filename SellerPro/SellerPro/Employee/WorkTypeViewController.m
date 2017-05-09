@@ -32,13 +32,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-- (NSArray *)dataSource
-{
-    if (!_dataSource) {
-        _dataSource = @[@"洗车工",@"维修工",@"打蜡工"];
-    }
-    return _dataSource;
-}
+//- (NSArray *)dataSource
+//{
+//    if (!_dataSource) {
+//        _dataSource = @[@"洗车工",@"维修工",@"打蜡工"];
+//    }
+//    return _dataSource;
+//}
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
@@ -50,6 +50,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+    [self featchData];
 }
 
 #pragma mark - tableView Delegate
@@ -79,9 +80,25 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     myCell.iconView.hidden = NO;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
-    myCell.titleLabel.text = self.dataSource[indexPath.row];
+//    myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    myCell.titleLabel.text = [dict objectForKey:@"name"];
 }
-
+#pragma mark -- private method
+-(void)featchData{
+    [DTNetManger workStypeListWithCallBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)response;
+            if (arr.count>0) {
+                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
+                [_myTableView reloadData];
+            }else{
+                [MBProgressHUD showError:@"暂无数据" toView:self.view];
+            }
+        }else{
+            [MBProgressHUD showError:error.description toView:self.view];
+        }
+    }];
+}
 @end
 

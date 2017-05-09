@@ -31,13 +31,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-- (NSArray *)dataSource
-{
-    if (!_dataSource) {
-        _dataSource = @[@"服务项目-",@"服务项目-",@"服务项目-",@"服务项目-"];
-    }
-    return _dataSource;
-}
+//- (NSArray *)dataSource
+//{
+//    if (!_dataSource) {
+//        _dataSource = @[@"服务项目-",@"服务项目-",@"服务项目-",@"服务项目-"];
+//    }
+//    return _dataSource;
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"服务项目";
@@ -50,6 +50,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
+    [self featchData];
 }
 
 #pragma mark - tableView Delegate
@@ -95,7 +96,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
-    myCell.textLabel.text = self.dataSource[indexPath.row];
+    NSDictionary *dic = self.dataSource[indexPath.row];
+    myCell.textLabel.text = [dic objectForKey:@"name"];
   
    
 }
@@ -108,6 +110,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)add:(UIButton*)sender{
     DddSeviceViewController *vc = [[DddSeviceViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)featchData{
+    [DTNetManger seviceListWithCallBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)response;
+            if (arr.count>0) {
+                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
+                [_myTableView reloadData];
+            }else{
+                [MBProgressHUD showError:@"暂无数据" toView:self.view];
+            }
+        }else{
+            [MBProgressHUD showError:error.description toView:self.view];
+        }
+    }];
 }
 @end
 
