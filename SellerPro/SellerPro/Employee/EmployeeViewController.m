@@ -7,9 +7,9 @@
 //
 
 #import "EmployeeViewController.h"
-#import "ContentViewController.h"
 #import "StaffViewController.h"
 #import "WorkTypeViewController.h"
+
 
 @interface EmployeeViewController () <TabContainerDelegate,TabContainerDataSource>
 @property (nonatomic) NSUInteger numberOfTabs;

@@ -37,6 +37,12 @@
 		BB87F43F1EC05A5E00D67843 /* FPPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */; };
 		BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43D1EC05A5E00D67843 /* FPTouchView.m */; };
 		BB87F4431EC05D2500D67843 /* TimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4421EC05D2500D67843 /* TimeViewController.m */; };
+		BB87F44B1EC16A1D00D67843 /* EmployeeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4491EC16A1D00D67843 /* EmployeeTableViewCell.m */; };
+		BB87F44C1EC16A1D00D67843 /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */; };
+		BB87F4501EC1709500D67843 /* SpersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F44E1EC1709500D67843 /* SpersonTableViewCell.m */; };
+		BB87F4511EC1709500D67843 /* SpersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F44F1EC1709500D67843 /* SpersonTableViewCell.xib */; };
+		BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */; };
+		BB87F4561EC1722100D67843 /* SprogramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +108,15 @@
 		BB87F43D1EC05A5E00D67843 /* FPTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTouchView.m; sourceTree = "<group>"; };
 		BB87F4411EC05D2500D67843 /* TimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeViewController.h; sourceTree = "<group>"; };
 		BB87F4421EC05D2500D67843 /* TimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeViewController.m; sourceTree = "<group>"; };
+		BB87F4481EC16A1D00D67843 /* EmployeeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeTableViewCell.h; sourceTree = "<group>"; };
+		BB87F4491EC16A1D00D67843 /* EmployeeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeTableViewCell.m; sourceTree = "<group>"; };
+		BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
+		BB87F44D1EC1709500D67843 /* SpersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpersonTableViewCell.h; sourceTree = "<group>"; };
+		BB87F44E1EC1709500D67843 /* SpersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpersonTableViewCell.m; sourceTree = "<group>"; };
+		BB87F44F1EC1709500D67843 /* SpersonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpersonTableViewCell.xib; sourceTree = "<group>"; };
+		BB87F4521EC1722100D67843 /* SprogramTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SprogramTableViewCell.h; sourceTree = "<group>"; };
+		BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SprogramTableViewCell.m; sourceTree = "<group>"; };
+		BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SprogramTableViewCell.xib; sourceTree = "<group>"; };
 		D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +156,9 @@
 				712952291EC0BD63005A16F0 /* WorkTypeViewController.m */,
 				712952371EC0BF7A005A16F0 /* StaffInfoViewController.h */,
 				712952381EC0BF7A005A16F0 /* StaffInfoViewController.m */,
+				BB87F4481EC16A1D00D67843 /* EmployeeTableViewCell.h */,
+				BB87F4491EC16A1D00D67843 /* EmployeeTableViewCell.m */,
+				BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -158,6 +176,12 @@
 				712952321EC0BE49005A16F0 /* PersionViewController.m */,
 				712952341EC0BE58005A16F0 /* ProgramViewController.h */,
 				712952351EC0BE58005A16F0 /* ProgramViewController.m */,
+				BB87F44D1EC1709500D67843 /* SpersonTableViewCell.h */,
+				BB87F44E1EC1709500D67843 /* SpersonTableViewCell.m */,
+				BB87F44F1EC1709500D67843 /* SpersonTableViewCell.xib */,
+				BB87F4521EC1722100D67843 /* SprogramTableViewCell.h */,
+				BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */,
+				BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -359,6 +383,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				710FEF661EBEE23D0064CC85 /* LaunchScreen.storyboard in Resources */,
+				BB87F4511EC1709500D67843 /* SpersonTableViewCell.xib in Resources */,
+				BB87F4561EC1722100D67843 /* SprogramTableViewCell.xib in Resources */,
+				BB87F44C1EC16A1D00D67843 /* EmployeeTableViewCell.xib in Resources */,
 				710FEF631EBEE23D0064CC85 /* Assets.xcassets in Resources */,
 				710FEF611EBEE23D0064CC85 /* Main.storyboard in Resources */,
 			);
@@ -429,6 +456,7 @@
 				BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */,
 				7109ED481EBEF11300C542AC /* EmployeeViewController.m in Sources */,
 				71322E3C1EC0AFB1003E0D23 /* DddSeviceViewController.m in Sources */,
+				BB87F44B1EC16A1D00D67843 /* EmployeeTableViewCell.m in Sources */,
 				712952331EC0BE49005A16F0 /* PersionViewController.m in Sources */,
 				712952271EC0BC36005A16F0 /* StaffViewController.m in Sources */,
 				71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */,
@@ -436,11 +464,13 @@
 				712952361EC0BE58005A16F0 /* ProgramViewController.m in Sources */,
 				710FEF581EBEE23C0064CC85 /* main.m in Sources */,
 				71322E391EC09F0D003E0D23 /* Tools.m in Sources */,
+				BB87F4501EC1709500D67843 /* SpersonTableViewCell.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
 				BB87F4431EC05D2500D67843 /* TimeViewController.m in Sources */,
 				7109ED421EBEEA7B00C542AC /* DTMyTableViewCell.m in Sources */,
 				7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */,
+				BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */,
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,

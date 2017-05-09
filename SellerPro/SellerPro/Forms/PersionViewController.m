@@ -7,7 +7,7 @@
 //
 
 #import "PersionViewController.h"
-#import "DTMyTableViewCell.h"
+#import "SpersonTableViewCell.h"
 
 @interface PersionViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -28,7 +28,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = DT_Base_LineColor;
-        [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerNib:[UINib nibWithNibName:@"SpersonTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
@@ -67,20 +67,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    SpersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *myCell = (DTMyTableViewCell *)cell;
-    myCell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    myCell.titleLabel.textColor = DT_Base_TitleColor;
-    myCell.iconView.hidden = NO;
+//   x SpersonTableViewCell *cell = (SpersonTableViewCell *)cell;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
-    myCell.titleLabel.text = self.dataSource[indexPath.row];
 }
 
 @end

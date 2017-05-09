@@ -35,7 +35,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@"业绩报表",@"员工管理",@"服务项目",@"密码设置"];
+        _dataSource = @[@"洗车工",@"维修工",@"打蜡工"];
     }
     return _dataSource;
 }

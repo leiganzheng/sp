@@ -7,8 +7,8 @@
 //
 
 #import "StaffViewController.h"
-#import "DTMyTableViewCell.h"
 #import "StaffInfoViewController.h"
+#import "EmployeeTableViewCell.h"
 
 @interface StaffViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -24,12 +24,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 100;
+        _myTableView.rowHeight = 90;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = DT_Base_LineColor;
-        [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerNib:[UINib nibWithNibName:@"EmployeeTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
@@ -68,20 +67,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    EmployeeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *myCell = (DTMyTableViewCell *)cell;
-    myCell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    myCell.titleLabel.textColor = DT_Base_TitleColor;
-    myCell.iconView.hidden = YES;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
-    myCell.titleLabel.text = self.dataSource[indexPath.row];
+    EmployeeTableViewCell *myCell = (EmployeeTableViewCell *)cell;
+    myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
