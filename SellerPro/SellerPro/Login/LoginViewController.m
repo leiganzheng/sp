@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "ForgetPWViewController.h"
+#import "MainViewController.h"
+
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *login;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
@@ -26,10 +28,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+     [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
 - (IBAction)loginAction:(id)sender {
-    [DTNetManger loginWith:@"18682242936" PW:@"123" callBack:^(NSError *error, NSArray *response) {
-        
-    }];
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    MainViewController *main = [board instantiateViewControllerWithIdentifier:@"MainViewController"];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:main];
+    [Tools enterRootViewController:nav animated:YES];
+//    [DTNetManger loginWith:@"18682242936" PW:@"123" callBack:^(NSError *error, NSArray *response) {
+//        
+//    }];
 }
 - (IBAction)forgetPW:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];

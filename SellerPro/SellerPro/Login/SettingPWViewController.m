@@ -50,7 +50,8 @@
 - (IBAction)login:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     LoginViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    [self presentViewController:cvc animated:YES completion:^{
+     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cvc];
+    [self presentViewController:nav animated:YES completion:^{
         
     }];
 }
