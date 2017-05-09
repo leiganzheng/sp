@@ -9,5 +9,5 @@
 #import "DTBaseViewController.h"
 
 @interface StaffInfoViewController : DTBaseViewController
-
+@property(nonatomic,strong) NSString *staffID;
 @end

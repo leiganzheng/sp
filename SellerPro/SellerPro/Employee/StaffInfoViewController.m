@@ -23,7 +23,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-108) style:UITableViewStyleGrouped];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, 265) style:UITableViewStylePlain];
         _myTableView.rowHeight = 52;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -51,7 +51,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-
+    [self featchData];
 }
 
 #pragma mark - tableView Delegate
@@ -64,20 +64,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-        lb.text = _dataSource1[indexPath.row];
-        lb.textAlignment = NSTextAlignmentRight;
-        lb.textColor = [UIColor lightGrayColor];
-        cell.accessoryView = lb;
-        if (indexPath.row == 2) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
+    
         return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
     myCell.textLabel.text = self.dataSource[indexPath.row];
+    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    lb.text = _dataSource1[indexPath.row];
+    lb.textAlignment = NSTextAlignmentRight;
+    lb.textColor = [UIColor lightGrayColor];
+    cell.accessoryView = lb;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -86,15 +87,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 #pragma mark - private action
 -(void)save:(UIButton *)sender{
-    [DTNetManger getStaffInfoWith:@"" callBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dict = (NSDictionary*)response;
-            _dataSource1 = @[[dict objectForKey:@"name"],[dict objectForKey:@"phone"],[dict objectForKey:@"work_type_id"],[dict objectForKey:@"is_disabled"],@""];
+    
+}
+-(void)featchData{
+    if (self.staffID&&self.staffID.length != 0) {
+        [DTNetManger getStaffInfoWith:self.staffID callBack:^(NSError *error, id response) {
+            if (response && [response isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *dict = (NSDictionary*)response;
+                _dataSource1 = @[[dict objectForKey:@"name"],[dict objectForKey:@"phone"],[NSString stringWithFormat:@"%@",[dict objectForKey:@"work_type_id"]],[NSString stringWithFormat:@"%@",[dict objectForKey:@"is_disabled"]],@""];
                 [_myTableView reloadData];
-        }else{
-            [MBProgressHUD showError:error.description toView:self.view];
-        }
-
-    }];
+            }else{
+                [MBProgressHUD showError:error.description toView:self.view];
+            }
+            
+        }];
+    }
+    
 }
 @end

@@ -52,12 +52,12 @@
                          nil];
     [HYBNetworking postWithUrl:kDVerifyCodeUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
-        if (code) {
+        if (code.integerValue == 0) {
             if (callBack) {
                 callBack(nil,response);
             }
         }else{
-            [DTNetManger requestFailedCallBack:callBack];
+            callBack(nil,response);
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];
@@ -72,7 +72,7 @@
                          nil];
     [HYBNetworking postWithUrl:kDTCheckVerifyCodeUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
-        if (code) {
+        if (code.integerValue == 0) {
             if (callBack) {
                 callBack(nil,response);
             }
@@ -93,7 +93,7 @@
                          nil];
     [HYBNetworking postWithUrl:kDTMpasswordUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
-        if (code) {
+        if (code.integerValue == 0) {
             if (callBack) {
                 callBack(nil,response);
             }

@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [Tools configCornerOfView:_bgView with:3];
+    self.bgline.layer.masksToBounds = YES;
+    self.bgline.layer.cornerRadius = self.bgline.frame.size.width/2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -22,7 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _phoneTF.text = @"18682242936";
+    _pwTF.text = @"123";
     [Tools configCornerOfView:_login with:3];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,35 +42,43 @@
      [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 - (IBAction)loginAction:(id)sender {
-    [DTNetManger loginWith:@"18682242936" PW:@"123" callBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dict = (NSDictionary *)response;
-            ((AppDelegate*)[UIApplication sharedApplication].delegate).token = dict[@"token"];
-            ((AppDelegate*)[UIApplication sharedApplication].delegate).rtoken = dict[@"refresh_token"];
-            //跳转
-            UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-            MainViewController *main = [board instantiateViewControllerWithIdentifier:@"MainViewController"];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:main];
-            [Tools enterRootViewController:nav animated:YES];
-        }else{
-            [MBProgressHUD showError:@"登录失败，请重试" toView:self.view];
-        }
-    }];
+    if ([self check]) {
+        [DTNetManger loginWith:_phoneTF.text PW:_pwTF.text callBack:^(NSError *error, id response) {
+            if (response && [response isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *dict = (NSDictionary *)response;
+                ((AppDelegate*)[UIApplication sharedApplication].delegate).token = dict[@"token"];
+                ((AppDelegate*)[UIApplication sharedApplication].delegate).rtoken = dict[@"refresh_token"];
+                //跳转
+                UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+                MainViewController *main = [board instantiateViewControllerWithIdentifier:@"MainViewController"];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:main];
+                [Tools enterRootViewController:nav animated:YES];
+            }else{
+                [MBProgressHUD showError:@"登录失败，请重试" toView:self.view];
+            }
+        }];
+    }
 }
 - (IBAction)forgetPW:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     ForgetPWViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ForgetPWViewController"];
     [self.navigationController pushViewController:cvc animated:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (BOOL)check{
+    if (_phoneTF.text.length == 0) {
+        [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+        return NO;
+    }else{
+        if (_pwTF.text.length == 0) {
+             [MBProgressHUD showError:@"请输入密码" toView:self.view];
+            return NO;
+        }
+        return YES;
+    }
 }
-*/
+- (void)tap{
+    [_phoneTF resignFirstResponder];
+    [_pwTF resignFirstResponder];
+}
 
 @end

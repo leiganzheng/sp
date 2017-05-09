@@ -29,7 +29,9 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:@"12月" forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"home_btn_dropdown"] forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 60, 44);
+    btn.frame = CGRectMake(0, 0, 44, 44);
+    btn.titleEdgeInsets = UIEdgeInsetsMake(0, -btn.imageView.frame.size.width - btn.frame.size.width + btn.titleLabel.intrinsicContentSize.width, 0, 0);
+    btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -btn.titleLabel.frame.size.width - btn.frame.size.width + btn.imageView.frame.size.width);
     [btn addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
 }

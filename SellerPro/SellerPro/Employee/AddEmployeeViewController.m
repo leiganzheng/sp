@@ -1,15 +1,15 @@
 //
-//  ProgramViewController.m
+//  AddEmployeeViewController.m
 //  SellerPro
 //
-//  Created by leiganzheng on 2017/5/8.
+//  Created by leiganzheng on 2017/5/9.
 //  Copyright © 2017年 karashock. All rights reserved.
 //
 
-#import "ProgramViewController.h"
-#import "SprogramTableViewCell.h"
+#import "AddEmployeeViewController.h"
+#import "DTMyTableViewCell.h"
 
-@interface ProgramViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AddEmployeeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -18,7 +18,7 @@
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
-@implementation ProgramViewController
+@implementation AddEmployeeViewController
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
@@ -28,17 +28,17 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = DT_Base_LineColor;
-       [_myTableView registerNib:[UINib nibWithNibName:@"SprogramTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
-//- (NSArray *)dataSource
-//{
-//    if (!_dataSource) {
-//        _dataSource = @[@"服务项目一",@"服务项目一",@"服务项目一",@"服务项目一"];
-//    }
-//    return _dataSource;
-//}
+- (NSArray *)dataSource
+{
+    if (!_dataSource) {
+        _dataSource = @[@"洗车工",@"维修工",@"打蜡工"];
+    }
+    return _dataSource;
+}
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
@@ -49,8 +49,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"添加员工";
+    [self setLeftBackNavItem];
     [self.view addSubview:self.myTableView];
-    [self featchData];
 }
 
 #pragma mark - tableView Delegate
@@ -68,33 +69,28 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SprogramTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    DTMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SprogramTableViewCell *myCell = (SprogramTableViewCell*)cell;
-    NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.name.text = [dict objectForKey:@"service"];
-        myCell.price.text = [dict objectForKey:@"order_sum"];
-//        myCell.logoName.text = [dict objectForKey:@"work_type"];
+    DTMyTableViewCell *myCell = (DTMyTableViewCell *)cell;
+    myCell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+    myCell.titleLabel.textColor = DT_Base_TitleColor;
+    myCell.iconView.hidden = NO;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"洗" forState:UIControlStateNormal];
+    btn.backgroundColor =RGB(17, 157, 255);
+    btn.frame = CGRectMake(0, 0, 60, 60);
+    btn.layer.masksToBounds = YES;
+    btn.layer.cornerRadius = btn.frame.size.width/2;
+//    btn.layer.borderColor = RGB(17, 157, 255).CGColor;
+//    btn.layer.borderWidth = 1;
+    [myCell.iconView addSubview:btn];
+    //    myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
+    myCell.titleLabel.text = self.dataSource[indexPath.row];
 }
--(void)featchData{
-    [DTNetManger orderServicePageWith: @"1" size:@"10" date:@"2016-01" callBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
-                [_myTableView reloadData];
-            }else{
-                [MBProgressHUD showError:@"暂无数据" toView:self.view];
-            }
-        }else{
-            [MBProgressHUD showError:[response objectForKey:@"msg"] toView:self.view];
-        }
-
-    }];
-}
-
+#pragma mark -- private method
 @end

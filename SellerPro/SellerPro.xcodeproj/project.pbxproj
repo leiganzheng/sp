@@ -29,6 +29,7 @@
 		712952331EC0BE49005A16F0 /* PersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952321EC0BE49005A16F0 /* PersionViewController.m */; };
 		712952361EC0BE58005A16F0 /* ProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952351EC0BE58005A16F0 /* ProgramViewController.m */; };
 		712952391EC0BF7A005A16F0 /* StaffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952381EC0BF7A005A16F0 /* StaffInfoViewController.m */; };
+		7129523C1EC208BD005A16F0 /* AddEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */; };
 		71322E391EC09F0D003E0D23 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 71322E381EC09F0D003E0D23 /* Tools.m */; };
 		71322E3C1EC0AFB1003E0D23 /* DddSeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71322E3B1EC0AFB1003E0D23 /* DddSeviceViewController.m */; };
 		71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */; };
@@ -93,6 +94,8 @@
 		712952351EC0BE58005A16F0 /* ProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramViewController.m; sourceTree = "<group>"; };
 		712952371EC0BF7A005A16F0 /* StaffInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffInfoViewController.h; sourceTree = "<group>"; };
 		712952381EC0BF7A005A16F0 /* StaffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffInfoViewController.m; sourceTree = "<group>"; };
+		7129523A1EC208BD005A16F0 /* AddEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEmployeeViewController.h; sourceTree = "<group>"; };
+		7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEmployeeViewController.m; sourceTree = "<group>"; };
 		71322E371EC09F0D003E0D23 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		71322E381EC09F0D003E0D23 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		71322E3A1EC0AFB1003E0D23 /* DddSeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DddSeviceViewController.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				BB87F4481EC16A1D00D67843 /* EmployeeTableViewCell.h */,
 				BB87F4491EC16A1D00D67843 /* EmployeeTableViewCell.m */,
 				BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */,
+				7129523A1EC208BD005A16F0 /* AddEmployeeViewController.h */,
+				7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -498,6 +503,7 @@
 				BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,
+				7129523C1EC208BD005A16F0 /* AddEmployeeViewController.m in Sources */,
 				7109ED4B1EBEF16500C542AC /* FromsMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

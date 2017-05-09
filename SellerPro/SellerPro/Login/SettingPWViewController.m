@@ -28,7 +28,8 @@
     [Tools configCornerOfView:_doneBtn with:3];
     [Tools configCornerOfView:_loginBtn with:3];
     self.customView.hidden = YES;
-    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,14 +39,23 @@
 - (IBAction)doneAction:(id)sender {
     self.customView.hidden = NO;
     self.setView.hidden = YES;
-//    if (self.passWordTF.text.length != 0) {
-//        [DTNetManger modifyPassWordWith:self.phone PW:self.passWordTF.text code:self.code callBack:^(NSError *error, NSArray *response) {
-//            
-//        }];
-//    }else{
-//
-//    }
+    if ([self check]) {
+        [DTNetManger modifyPassWordWith:self.phone PW:self.passWordTF.text code:self.code callBack:^(NSError *error, NSArray *response) {
+            
+        }];
+    }
   
+}
+- (BOOL)check{
+    if (_passWordTF.text.length == 0) {
+        [MBProgressHUD showError:@"请输入新密码" toView:self.view];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)tap{
+    [_passWordTF resignFirstResponder];
 }
 - (IBAction)login:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];

@@ -9,6 +9,7 @@
 #import "StaffViewController.h"
 #import "StaffInfoViewController.h"
 #import "EmployeeTableViewCell.h"
+#import "AddEmployeeViewController.h"
 
 @interface StaffViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -50,6 +51,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, KSCREEN_HEIGHT-232, KSCREEN_WIDTH, 44);
+    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add_pressed"] forState:UIControlStateSelected];
+    btn.backgroundColor = [UIColor clearColor];
+    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+
     [self featchData];
 }
 
@@ -84,10 +93,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *dict = self.dataSource[indexPath.row];
     StaffInfoViewController *cvc = [[StaffInfoViewController alloc] init];
+    cvc.staffID = [NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]];
     [self.navigationController pushViewController:cvc animated:YES];
 }
-
+- (void)save:(UIButton *)sender{
+    AddEmployeeViewController *vc = [[AddEmployeeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 -(void)featchData{
     [DTNetManger StaffPageWith:@"1" size:@"10" callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSArray class]]) {

@@ -50,6 +50,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, KSCREEN_HEIGHT-232, KSCREEN_WIDTH, 44);
+    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_normal"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_pressed"] forState:UIControlStateSelected];
+    btn.backgroundColor = [UIColor clearColor];
+    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+
     [self featchData];
 }
 
@@ -79,12 +87,23 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     myCell.titleLabel.textColor = DT_Base_TitleColor;
     myCell.iconView.hidden = NO;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-//    myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"洗" forState:UIControlStateNormal];
+    btn.backgroundColor =RGB(17, 157, 255);
+    btn.frame = CGRectMake(0, 0, 60, 60);
+    btn.layer.masksToBounds = YES;
+    btn.layer.cornerRadius = btn.frame.size.width/2;
+    //    btn.layer.borderColor = RGB(17, 157, 255).CGColor;
+    //    btn.layer.borderWidth = 1;
+    [myCell.iconView addSubview:btn];
+
     NSDictionary *dict = self.dataSource[indexPath.row];
     myCell.titleLabel.text = [dict objectForKey:@"name"];
 }
 #pragma mark -- private method
+- (void)save:(UIButton *)sender{
+
+}
 -(void)featchData{
     [DTNetManger workStypeListWithCallBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSArray class]]) {

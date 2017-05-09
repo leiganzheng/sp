@@ -22,7 +22,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
         _myTableView.rowHeight = 90;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -100,7 +100,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
                 [MBProgressHUD showError:@"暂无数据" toView:self.view];
             }
         }else{
-            [MBProgressHUD showError:error.description toView:self.view];
+            [MBProgressHUD showError:[response objectForKey:@"msg"] toView:self.view];
         }
 
     }];
