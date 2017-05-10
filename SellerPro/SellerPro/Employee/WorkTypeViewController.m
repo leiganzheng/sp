@@ -8,6 +8,8 @@
 
 #import "WorkTypeViewController.h"
 #import "DTMyTableViewCell.h"
+#import "AddWorkTypeViewController.h"
+#import "QRCodeViewController.h"
 
 @interface WorkTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -32,13 +34,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-//- (NSArray *)dataSource
-//{
-//    if (!_dataSource) {
-//        _dataSource = @[@"洗车工",@"维修工",@"打蜡工"];
-//    }
-//    return _dataSource;
-//}
+
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
@@ -50,14 +46,19 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, KSCREEN_HEIGHT-232, KSCREEN_WIDTH, 44);
-    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_normal"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_pressed"] forState:UIControlStateSelected];
-    btn.backgroundColor = [UIColor clearColor];
-    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-
+    if (!self.isAdd) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(0, KSCREEN_HEIGHT-232, KSCREEN_WIDTH, 44);
+        [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_normal"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_pressed"] forState:UIControlStateSelected];
+        btn.backgroundColor = [UIColor clearColor];
+        [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btn];
+    }
+    if (self.isAdd) {
+        [self setLeftBackNavItem];
+        self.title = @"添加员工";
+    }
     [self featchData];
 }
 
@@ -100,9 +101,37 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSDictionary *dict = self.dataSource[indexPath.row];
     myCell.titleLabel.text = [dict objectForKey:@"name"];
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.isAdd) {
+        NSDictionary *dict = self.dataSource[indexPath.row];
+        [DTNetManger getUrlOfWorkTypeWith:[dict objectForKey:@"id"] callBack:^(NSError *error, id response) {
+            if (response && [response isKindOfClass:[NSDictionary class]]) {
+                UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+                QRCodeViewController *cvc = [board instantiateViewControllerWithIdentifier:@"QRCodeViewController"];
+                cvc.dict = (NSDictionary *)response;
+                [self.navigationController pushViewController:cvc animated:YES];
+
+            }else{
+                [MBProgressHUD showError:error.description toView:self.view];
+            }
+        }];
+    }else{
+        NSDictionary *dict = self.dataSource[indexPath.row];
+        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+        AddWorkTypeViewController *cvc = [board instantiateViewControllerWithIdentifier:@"AddWorkTypeViewController"];
+        cvc.isAdd = NO;
+        cvc.nameStr = [dict objectForKey:@"name"];
+         cvc.workType = [dict objectForKey:@"id"];
+        [self.navigationController pushViewController:cvc animated:YES];
+    }
+}
 #pragma mark -- private method
 - (void)save:(UIButton *)sender{
-
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    AddWorkTypeViewController *cvc = [board instantiateViewControllerWithIdentifier:@"AddWorkTypeViewController"];
+    cvc.isAdd = YES;
+    [self.navigationController pushViewController:cvc animated:YES];
 }
 -(void)featchData{
     [DTNetManger workStypeListWithCallBack:^(NSError *error, id response) {

@@ -82,6 +82,7 @@
         return cvc;
     }else{
         WorkTypeViewController *cvc = [[WorkTypeViewController alloc] init];
+        cvc.isAdd = NO;
         return cvc;
     }
 }

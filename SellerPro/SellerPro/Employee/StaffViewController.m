@@ -10,6 +10,7 @@
 #import "StaffInfoViewController.h"
 #import "EmployeeTableViewCell.h"
 #import "AddEmployeeViewController.h"
+#import "WorkTypeViewController.h"
 
 @interface StaffViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -99,7 +100,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.navigationController pushViewController:cvc animated:YES];
 }
 - (void)save:(UIButton *)sender{
-    AddEmployeeViewController *vc = [[AddEmployeeViewController alloc] init];
+    WorkTypeViewController *vc = [[WorkTypeViewController alloc] init];
+    vc.isAdd = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchData{

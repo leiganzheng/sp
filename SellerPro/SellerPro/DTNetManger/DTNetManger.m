@@ -206,7 +206,7 @@
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
-                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                NSDictionary *arr = [(NSDictionary*)response objectForKey:@"data"];
                 callBack(nil,arr);
             }
         }else{
@@ -246,15 +246,15 @@
               callBack:(callBack)callBack{
     [Tools configOrignNetWork];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         typeId,@"work_type_id",
                          name,@"name",
+                         typeId,@"work_type_id",
                          nil];
     [HYBNetworking postWithUrl:kDTsaveUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
-                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
-                callBack(nil,arr);
+//                NSDictionary *arr = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,response);
             }
         }else{
             [DTNetManger requestFailedCallBack:callBack];
@@ -276,7 +276,7 @@
         if (code.integerValue == 0) {
             if (callBack) {
                 
-                callBack(nil,nil);
+                callBack(nil,response);
             }
         }else{
             [DTNetManger requestFailedCallBack:callBack];

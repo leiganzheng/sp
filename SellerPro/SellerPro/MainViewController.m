@@ -57,7 +57,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     self.title = @"首页";
     [self.view addSubview:self.myTableView];
     UIImageView * im= [[UIImageView alloc] init];
-    im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, _myTableView.frame.size.height + 10, 150, 28);
+    im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, _myTableView.frame.size.height, 150, 28);
     im.image = [UIImage imageNamed:@"home_img_92logo"];
     [self.view addSubview:im];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];

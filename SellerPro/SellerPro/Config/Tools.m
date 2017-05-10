@@ -109,7 +109,7 @@
     //    }
     return output;
 }
-+(void)QRCodeGenerator{
++(void)QRCodeGenerator:(UIImageView *)imageView withUrl:(NSString *)url{
     // 1.创建过滤器
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     
@@ -117,8 +117,7 @@
     [filter setDefaults];
     
     // 3.给过滤器添加数据(正则表达式/账号和密码)
-    NSString *dataString = @"http://www.520it.com";
-    NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [url dataUsingEncoding:NSUTF8StringEncoding];
     [filter setValue:data forKeyPath:@"inputMessage"];
     
     // 4.获取输出的二维码
@@ -127,7 +126,7 @@
     //因为生成的二维码模糊，所以通过createNonInterpolatedUIImageFormCIImage:outputImage来获得高清的二维码图片
     
     // 5.显示二维码
-//    self.imageView.image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:200];
+    imageView.image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:200];
 }
 /**
  *  根据CIImage生成指定大小的UIImage

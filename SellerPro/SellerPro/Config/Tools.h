@@ -14,6 +14,6 @@
 +(void)enterRootViewController:(UIViewController *)vc animated:(BOOL)animated;
 +(void)configOrignNetWork;
 
-+(void)QRCodeGenerator;
++(void)QRCodeGenerator:(UIImageView *)imageView withUrl:(NSString*)url;
 
 @end
