@@ -212,7 +212,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516012052.72025"
+                  timestampString = "516091922.860628"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "139"
@@ -227,7 +227,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516012052.722042"
+                  timestampString = "516091922.862756"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "140"
@@ -250,6 +250,22 @@
             startingLineNumber = "141"
             endingLineNumber = "141"
             landmarkName = "+orderStaffPageWith:size:date:callBack:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SellerPro/Lib/FPPopover/FPPopoverController.m"
+            timestampString = "516091383.49638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "-initWithViewController:delegate:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

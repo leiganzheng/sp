@@ -21,11 +21,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 200, 300) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 180, 230) style:UITableViewStylePlain];
         _myTableView.rowHeight = 40;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
-        _myTableView.backgroundColor = RGB(249, 249, 249);
         _myTableView.separatorColor = DT_Base_LineColor;
         [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
@@ -34,7 +33,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@"1月",@"1月",@"1月",@"1月"];
+        _dataSource = @[@"1月",@"2月",@"3月",@"4月",@"5月",@"6月",@"7月",@"8月",@"9月",@"10月",@"11月",@"12月"];
     }
     return _dataSource;
 }
