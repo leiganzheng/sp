@@ -12,6 +12,7 @@
 #import "FromsMViewController.h"
 #import "ServiceViewController.h"
 #import "ForgetPWViewController.h"
+#import "LoginViewController.h"
 
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -59,6 +60,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, _myTableView.frame.size.height + 10, 150, 28);
     im.image = [UIImage imageNamed:@"home_img_92logo"];
     [self.view addSubview:im];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, im.frame.size.height+im.frame.origin.x+4, 150, 44);
+    [btn setTitle:@"退出登录" forState:UIControlStateNormal];
+    btn.backgroundColor = [UIColor clearColor];
+    [btn addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 #pragma mark - tableView Delegate
@@ -130,5 +137,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 }
 #pragma mark - private action
-// 免责声明
+- (void)logOut:(UIButton *)sender{
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    LoginViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cvc];
+    [Tools enterRootViewController:nav animated:YES];
+}
 @end

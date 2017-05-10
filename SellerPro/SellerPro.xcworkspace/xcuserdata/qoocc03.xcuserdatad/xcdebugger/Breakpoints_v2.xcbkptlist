@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
             endingLineNumber = "30"
-            landmarkName = "-didReceiveMemoryWarning"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,7 +169,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
             endingLineNumber = "95"
-            landmarkName = "-featchData"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,14 +185,14 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
             endingLineNumber = "80"
-            landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/DTNetManger/DTNetManger.m"
@@ -205,14 +205,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "+[DTNetManger orderStaffPageWith:size:date:callBack:]"
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516091922.860628"
+                  timestampString = "516093084.999929"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "139"
@@ -220,14 +220,14 @@
                   offsetFromSymbolStart = "345">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__53+[DTNetManger orderStaffPageWith:size:date:callBack:]_block_invoke"
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516091922.862756"
+                  timestampString = "516093085.001692"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "140"
@@ -240,7 +240,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/DTNetManger/DTNetManger.m"
