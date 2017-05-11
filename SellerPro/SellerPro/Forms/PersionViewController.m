@@ -28,17 +28,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = DT_Base_LineColor;
+        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self featchData];
+            
+        }];
         [_myTableView registerNib:[UINib nibWithNibName:@"SpersonTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
-//- (NSArray *)dataSource
-//{
-//    if (!_dataSource) {
-//        _dataSource = @[@"吴建权",@"吴建权",@"吴建权",@"吴建权"];
-//    }
-//    return _dataSource;
-//}
+
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
@@ -54,8 +52,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 
 #pragma mark - tableView Delegate
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+     [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
     return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -90,6 +90,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 [MBProgressHUD showError:@"暂无数据" toView:self.view];
             }
+            [self.myTableView.header endRefreshing];
         }else{
             [MBProgressHUD showError:error.description toView:self.view];
         }

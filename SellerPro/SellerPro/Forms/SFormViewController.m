@@ -28,6 +28,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = DT_Base_LineColor;
+        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self featchData];
+            
+        }];
        [_myTableView registerNib:[UINib nibWithNibName:@"SFormTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -55,6 +59,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+     [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
     return self.dataSource.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -99,6 +104,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 [MBProgressHUD showError:@"暂无数据" toView:self.view];
             }
+            [self.myTableView.header endRefreshing];
         }else{
             [MBProgressHUD showError:[response objectForKey:@"msg"] toView:self.view];
         }

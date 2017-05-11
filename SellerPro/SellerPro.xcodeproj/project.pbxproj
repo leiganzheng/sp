@@ -49,6 +49,7 @@
 		BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4581EC173F700D67843 /* SFormTableViewCell.m */; };
 		BB87F45B1EC173F700D67843 /* SFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */; };
 		BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */; };
+		BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4931EC443D500D67843 /* UITableView+Empty.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,6 +135,8 @@
 		BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFormTableViewCell.xib; sourceTree = "<group>"; };
 		BB87F45D1EC18E8200D67843 /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
+		BB87F4921EC443D500D67843 /* UITableView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Empty.h"; sourceTree = "<group>"; };
+		BB87F4931EC443D500D67843 /* UITableView+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Empty.m"; sourceTree = "<group>"; };
 		D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +161,8 @@
 				71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */,
 				7109ED3D1EBEE8BC00C542AC /* DTBaseViewController.h */,
 				7109ED3E1EBEE8BC00C542AC /* DTBaseViewController.m */,
+				BB87F4921EC443D500D67843 /* UITableView+Empty.h */,
+				BB87F4931EC443D500D67843 /* UITableView+Empty.m */,
 			);
 			path = SPBase;
 			sourceTree = "<group>";
@@ -487,6 +492,7 @@
 				712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */,
 				7129522A1EC0BD63005A16F0 /* WorkTypeViewController.m in Sources */,
 				712952391EC0BF7A005A16F0 /* StaffInfoViewController.m in Sources */,
+				BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */,
 				7109ED5D1EBF4CB200C542AC /* DTNetManger.m in Sources */,
 				7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */,
 				7109ED4E1EBEF1AA00C542AC /* ServiceViewController.m in Sources */,
