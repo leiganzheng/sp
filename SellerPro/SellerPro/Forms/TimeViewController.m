@@ -33,7 +33,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@"1月",@"2月",@"3月",@"4月",@"5月",@"6月",@"7月",@"8月",@"9月",@"10月",@"11月",@"12月"];
+        _dataSource = @[@"2017-01",@"2017-02",@"2017-03",@"2017-04",@"2017-05",@"2017-06",@"2017-07",@"2017-08",@"2017-09",@"2017-10",@"2017-11",@"2017-12"];
     }
     return _dataSource;
 }

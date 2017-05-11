@@ -27,7 +27,7 @@
     self.title = @"业绩报表";
     self.numberOfTabs = 3;   ///////当设置数量时，去调用setter方法去加载控件
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"12月" forState:UIControlStateNormal];
+    [btn setTitle:@"05月" forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"home_btn_dropdown"] forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 44, 44);
     btn.titleEdgeInsets = UIEdgeInsetsMake(0, -btn.imageView.frame.size.width - btn.frame.size.width + btn.titleLabel.intrinsicContentSize.width, 0, 0);

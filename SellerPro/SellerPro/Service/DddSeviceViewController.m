@@ -28,6 +28,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
+        _myTableView.separatorColor = DT_Base_LineColor;
         [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -35,7 +36,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@[@"项目名称",@"单件(元／次)",@"类别"],@[@"权限一",@"权限二"]];
+        _dataSource = @[@[@"项目名称",@"单件(元／次)",@"类别"],@[@"权限一",@"权限二",@"权限三",@"权限四"]];
         _dataSource1 = @[@"打蜡洗车",@"¥500.0",@"美容"];
     }
     return _dataSource;
@@ -46,7 +47,16 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self setLeftBackNavItem];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.myTableView];
-   
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, KSCREEN_HEIGHT-108, KSCREEN_WIDTH, 44);
+    [btn setTitle:@"保存" forState:UIControlStateNormal];
+    btn.backgroundColor = RGB(17, 157, 255);
+    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+
+}
+-(void)save:(UIButton *)sender{
+    
 }
 
 #pragma mark - tableView Delegate

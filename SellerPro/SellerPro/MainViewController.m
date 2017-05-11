@@ -32,7 +32,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = DT_Base_LineColor;
+        _myTableView.separatorColor = [UIColor clearColor];
         [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
