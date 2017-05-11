@@ -46,15 +46,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
-    if (!self.isAdd) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(0, KSCREEN_HEIGHT-232, KSCREEN_WIDTH, 44);
-        [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_normal"] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_pressed"] forState:UIControlStateSelected];
-        btn.backgroundColor = [UIColor clearColor];
-        [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btn];
-    }
     if (self.isAdd) {
         [self setLeftBackNavItem];
         self.title = @"添加员工";
@@ -73,8 +64,27 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.01;
+    if (self.isAdd){
+        return 0.01;
+    }
+    return 80;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if (!self.isAdd) {
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
+        v.backgroundColor = [UIColor clearColor];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(0, 40, KSCREEN_WIDTH, 44);
+        [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_normal"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_addwork_pressed"] forState:UIControlStateSelected];
+        btn.backgroundColor = [UIColor clearColor];
+        [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+        [v addSubview:btn];
+        return v;
+    }
+    return [UIView new];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DTMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
@@ -110,7 +120,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
                 UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
                 QRCodeViewController *cvc = [board instantiateViewControllerWithIdentifier:@"QRCodeViewController"];
                 cvc.dict = (NSDictionary *)response;
-                [self.navigationController pushViewController:cvc animated:YES];
+                cvc.view.backgroundColor=[UIColor colorWithWhite:0 alpha:0.4];
+                //关键语句，必须有
+                cvc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                [self presentViewController:cvc animated:YES completion:^{
+                    cvc.view.superview.backgroundColor = [UIColor clearColor];
+                }];
 
             }else{
                 [MBProgressHUD showError:error.description toView:self.view];

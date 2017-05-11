@@ -27,7 +27,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
         _myTableView.rowHeight = 100;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -56,15 +56,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [super viewDidLoad];
     self.title = @"首页";
     [self.view addSubview:self.myTableView];
-    UIImageView * im= [[UIImageView alloc] init];
-    im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, _myTableView.frame.size.height, 150, 28);
-    im.image = [UIImage imageNamed:@"home_img_92logo"];
-    [self.view addSubview:im];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, im.frame.size.height+im.frame.origin.x+4, 150, 44);
-    [btn setTitle:@"退出登录" forState:UIControlStateNormal];
-    btn.backgroundColor = [UIColor clearColor];
-    [btn addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
@@ -79,7 +70,26 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.01;
+    return 100;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,100)];
+    v.backgroundColor = [UIColor clearColor];
+    
+    UIImageView * im= [[UIImageView alloc] init];
+    im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, 40, 150, 28);
+    im.image = [UIImage imageNamed:@"home_img_92logo"];
+    [v addSubview:im];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, im.frame.size.height+30, 150, 44);
+    [btn setTitle:@"退出登录" forState:UIControlStateNormal];
+    btn.backgroundColor = [UIColor clearColor];
+    btn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btn setTitleColor:[UIColor lightGrayColor] forState:0];
+    [btn addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
+    [v addSubview:btn];
+    return v;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

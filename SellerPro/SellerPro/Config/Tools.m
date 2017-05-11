@@ -126,7 +126,7 @@
     //因为生成的二维码模糊，所以通过createNonInterpolatedUIImageFormCIImage:outputImage来获得高清的二维码图片
     
     // 5.显示二维码
-    imageView.image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:200];
+    imageView.image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:283];
 }
 /**
  *  根据CIImage生成指定大小的UIImage

@@ -34,13 +34,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-//- (NSArray *)dataSource
-//{
-//    if (!_dataSource) {
-//        _dataSource = @[@"吴建权",@"吴建权",@"吴建权",@"吴建权"];
-//    }
-//    return _dataSource;
-//}
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
@@ -52,14 +45,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, KSCREEN_HEIGHT-232, KSCREEN_WIDTH, 44);
-    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add_pressed"] forState:UIControlStateSelected];
-    btn.backgroundColor = [UIColor clearColor];
-    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-
+   
     [self featchData];
 }
 
@@ -74,8 +60,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.01;
+    return 80;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
+    v.backgroundColor = [UIColor clearColor];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 40, KSCREEN_WIDTH, 44);
+    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add_pressed"] forState:UIControlStateSelected];
+    btn.backgroundColor = [UIColor clearColor];
+    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [v addSubview:btn];
+    return v;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EmployeeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];

@@ -22,7 +22,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
         _myTableView.rowHeight = 100;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -32,13 +32,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-//- (NSArray *)dataSource
-//{
-//    if (!_dataSource) {
-//        _dataSource = @[@"服务项目一",@"服务项目一",@"服务项目一",@"服务项目一"];
-//    }
-//    return _dataSource;
-//}
+
 - (NSArray *)iconSource
 {
     if (!_iconSource) {

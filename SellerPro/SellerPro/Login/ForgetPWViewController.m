@@ -8,6 +8,8 @@
 
 #import "ForgetPWViewController.h"
 #import "SettingPWViewController.h"
+#import "AppDelegate.h"
+
 @interface ForgetPWViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bgPhone;
 @property (weak, nonatomic) IBOutlet UIView *bgCode;
@@ -25,11 +27,13 @@
     self.title = @"修改密码"; 
     [self setLeftBackNavItem];
     [Tools configCornerOfView:_bgPhone with:3];
+    _bgPhone.backgroundColor = [UIColor clearColor];
     [Tools configCornerOfView:_bgCode with:3];
     [Tools configCornerOfView:_nextStep with:3];
     [Tools configCornerOfView:_codeBtn with:3];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.view addGestureRecognizer:tap];
+    _phoneTF.text = ((AppDelegate*)[UIApplication sharedApplication].delegate).phone;
 
 }
 

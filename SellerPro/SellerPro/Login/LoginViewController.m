@@ -48,6 +48,7 @@
                 NSDictionary *dict = (NSDictionary *)response;
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).token = dict[@"token"];
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).rtoken = dict[@"refresh_token"];
+                ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = _phoneTF.text;
                 //跳转
                 UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
                 MainViewController *main = [board instantiateViewControllerWithIdentifier:@"MainViewController"];
