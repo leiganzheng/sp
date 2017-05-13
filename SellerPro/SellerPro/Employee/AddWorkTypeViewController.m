@@ -33,6 +33,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     [Tools configCornerOfView:_myTableView with:3];
     [self.view addSubview:_myTableView];
+    self.title = @"添加工种";
     if (!self.isAdd) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_deleted"] forState:UIControlStateNormal];
@@ -41,11 +42,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
         if (self.nameStr) {
             _name.text = self.nameStr;
-               self.title = @"添加工种";
-        }else{
-            self.workType = @"";
-            self.title = @"修改工种";
+               self.title = @"修改工种";
         }
+    }else{
+        self.workType = @"";
     }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.view addGestureRecognizer:tap];
