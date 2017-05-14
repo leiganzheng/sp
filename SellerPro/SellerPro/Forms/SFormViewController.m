@@ -12,9 +12,10 @@
 @interface SFormViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSArray *iconSource;
-
+@property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) NSString *date;
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
@@ -36,13 +37,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-- (NSArray *)dataSource
-{
-    if (!_dataSource) {
-        _dataSource = @[@[@"抛光打蜡",@"员工管理",@"服务项目",@"密码设置"],@[@"抛光打蜡",@"员工管理"]];
-    }
-    return _dataSource;
-}
+//- (NSArray *)dataSource
+//{
+//    if (!_dataSource) {
+//        _dataSource = @[@[@"抛光打蜡",@"员工管理",@"服务项目",@"密码设置"],@[@"抛光打蜡",@"员工管理"]];
+//    }
+//    return _dataSource;
+//}
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
@@ -53,8 +54,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.page = 1;
+    self.date = @"2017-04";
     [self.view addSubview:self.myTableView];
-//    [self featchData];
+    [self featchData];
 }
 
 #pragma mark - tableView Delegate
@@ -64,49 +67,74 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return ((NSArray*)self.dataSource[section]).count;
+//    return ((NSArray*)self.dataSource[section]).count;
+    return _dataSource.count;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return 0.01;
-    }
-    return 40;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 0.01;
-}
--(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (section ==0) {
-        return  @"";
-    }else{
-        return @"-----昨天------";
-    }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    if (section == 0) {
+//        return 0.01;
+//    }
+//    return 40;
+//}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    return 0.01;
+//}
+//-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    if (section ==0) {
+//        return  @"";
+//    }else{
+//        return @"-----昨天------";
+//    }
+//}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SFormTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    SFormTableViewCell *myCell = (SFormTableViewCell*)cell;
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    myCell.time.text = [dict objectForKey:@"pay_time"];
+    myCell.price.text = [dict objectForKey:@"price"];
+    NSArray *arr = (NSArray*)[dict objectForKey:@"service"];
+    NSMutableString *str = [[NSMutableString alloc]init];
+    for (NSDictionary *dic in arr) {
+        [str appendString:[dic objectForKey:@"name"]];
+    }
+    myCell.name.text = str;
 }
 -(void)featchData{
-    [DTNetManger orderPageWith:@"1" size:@"10" date:@"2016-01" callBack:^(NSError *error, id response) {
+    [DTNetManger orderPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" date:self.date callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSArray class]]) {
             NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
-                [_myTableView reloadData];
+            if (self.page == 1) {
+                self.dataSource = [[NSMutableArray alloc] init];
+                [self.dataSource removeAllObjects];
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_header endRefreshing];
             }else{
-                [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_footer endRefreshing];
+
             }
-            [self.myTableView.header endRefreshing];
         }else{
-            [MBProgressHUD showError:[response objectForKey:@"msg"] toView:self.view];
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+            }
+            
         }
 
     }];

@@ -13,8 +13,9 @@
 #import "PersionViewController.h"
 #import "ProgramViewController.h"
 
-@interface FromsMViewController () <TabContainerDelegate,TabContainerDataSource>
+@interface FromsMViewController () <TabContainerDelegate,TabContainerDataSource,TimeViewControllerDelegate>
 @property (nonatomic) NSUInteger numberOfTabs;
+@property (nonatomic,strong) FPPopoverController*popover;
 @end
 
 @implementation FromsMViewController
@@ -106,12 +107,17 @@
 #pragma mark -- private method
 - (void)select:(UIButton*)sender{
     TimeViewController *vc = [[TimeViewController alloc]init];
-    FPPopoverController*popover = [[FPPopoverController alloc] initWithViewController:vc];
-    popover.contentSize = CGSizeMake(200, 300);
-    popover.arrowDirection = UIMenuControllerArrowUp;
-    [popover presentPopoverFromView:sender];
+    vc.delegate = self;
+    _popover = [[FPPopoverController alloc] initWithViewController:vc];
+    _popover.contentSize = CGSizeMake(200, 300);
+    _popover.arrowDirection = UIMenuControllerArrowUp;
+    [_popover presentPopoverFromView:sender];
 }
 
+#pragma mark --TimeViewControllerDelegate
+- (void)didSelectedDate:(NSString *)date{
+    [_popover dismissPopoverAnimated:YES];
+}
 #pragma mark --TabContainerDelegate
 -(CGFloat)heightForTabInTabContainer:(TabContainerViewController *)tabContainer {
     return 44;

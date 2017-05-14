@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DTBaseViewController.h"
 
-@interface TimeViewController : DTBaseViewController
+@protocol TimeViewControllerDelegate <NSObject>
 
+- (void)didSelectedDate:(NSString *)date;
+
+@end
+
+@interface TimeViewController : DTBaseViewController
+@property(assign,nonatomic)id<TimeViewControllerDelegate> delegate;
 @end

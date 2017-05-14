@@ -121,7 +121,7 @@
                 callBack(nil,arr);
             }
         }else{
-            [DTNetManger requestFailedCallBack:callBack];
+            callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];
@@ -144,7 +144,7 @@
                 callBack(nil,arr);
             }
         }else{
-            [DTNetManger requestFailedCallBack:callBack];
+             callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];
@@ -170,7 +170,7 @@
                 callBack(nil,arr);
             }
         }else{
-            [DTNetManger requestFailedCallBack:callBack];
+             callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];

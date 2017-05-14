@@ -12,8 +12,10 @@
 @interface ProgramViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSArray *iconSource;
+@property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) NSString *date;
 
 @end
 
@@ -48,6 +50,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+    self.page = 1;
+    self.date = @"2017-04";
     [self featchData];
 }
 
@@ -75,23 +79,38 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     SprogramTableViewCell *myCell = (SprogramTableViewCell*)cell;
     NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.name.text = [dict objectForKey:@"service"];
+    myCell.name.text = [dict objectForKey:@"name"];
         myCell.price.text = [dict objectForKey:@"order_sum"];
-//        myCell.logoName.text = [dict objectForKey:@"work_type"];
+        myCell.logo.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"order_count"]];
 }
 -(void)featchData{
-    [DTNetManger orderServicePageWith: @"1" size:@"10" date:@"2016-01" callBack:^(NSError *error, id response) {
+    [DTNetManger orderServicePageWith: [NSString stringWithFormat:@"%ld",(long)self.page] size:@"10" date:self.date callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSArray class]]) {
             NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
-                [_myTableView reloadData];
+            if (self.page == 1) {
+                self.dataSource = [[NSMutableArray alloc] init];
+                [self.dataSource removeAllObjects];
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_header endRefreshing];
             }else{
-                [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_footer endRefreshing];
+                
             }
-            [self.myTableView.header endRefreshing];
         }else{
-            [MBProgressHUD showError:[response objectForKey:@"msg"] toView:self.view];
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+            }
         }
 
     }];

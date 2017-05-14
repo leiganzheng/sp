@@ -13,10 +13,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [Tools configCornerOfView:_bgView with:3];
-    self.logo.layer.masksToBounds = YES;
-    self.logo.layer.cornerRadius = self.logo.frame.size.width/2;
-    self.logo.layer.borderColor = RGB(17, 157, 255).CGColor;
-    self.logo.layer.borderWidth = 1;
+//    self.logo.layer.masksToBounds = YES;
+//    self.logo.layer.cornerRadius = self.logo.frame.size.width/2;
+//    self.logo.layer.borderColor = RGB(17, 157, 255).CGColor;
+//    self.logo.layer.borderWidth = 1;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

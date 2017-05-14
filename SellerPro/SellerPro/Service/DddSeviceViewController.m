@@ -36,7 +36,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@[@"项目名称",@"单件(元／次)",@"类别"],@[@"权限一",@"权限二",@"权限三",@"权限四"]];
+        _dataSource = @[@[@"项目名称",@"单价(元／次)",@"类别"],@[@"权限一",@"权限二",@"权限三",@"权限四"]];
         _dataSource1 = @[@"打蜡洗车",@"¥500.0",@"美容"];
     }
     return _dataSource;
