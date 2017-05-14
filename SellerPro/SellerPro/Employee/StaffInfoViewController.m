@@ -8,7 +8,7 @@
 
 #import "StaffInfoViewController.h"
 #import "DTMyTableViewCell.h"
-
+#import "StaffInfoMdViewController.h"
 @interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
@@ -28,6 +28,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
+
         [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -83,7 +84,16 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (indexPath.row ==2) {
+        StaffInfoMdViewController *vc = [[StaffInfoMdViewController alloc]init];
+        vc.isWorkType = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row ==3) {
+        StaffInfoMdViewController *vc = [[StaffInfoMdViewController alloc]init];
+        vc.isWorkType = NO;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 #pragma mark - private action
 -(void)save:(UIButton *)sender{
@@ -97,7 +107,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
                 _dataSource1 = @[[dict objectForKey:@"name"],[dict objectForKey:@"phone"],[NSString stringWithFormat:@"%@",[dict objectForKey:@"work_type_id"]],[NSString stringWithFormat:@"%@",[dict objectForKey:@"is_disabled"]],@""];
                 [_myTableView reloadData];
             }else{
-                [MBProgressHUD showError:error.description toView:self.view];
+                if ([response  isKindOfClass:[NSString class]]) {
+                    [MBProgressHUD showError:(NSString *)response toView:self.view];
+                    [self.myTableView.mj_header endRefreshing];
+                }
             }
             
         }];

@@ -29,7 +29,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = DT_Base_LineColor;
+        _myTableView.separatorColor = [UIColor clearColor];;
+        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self featchData];
+            
+        }];
         [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -158,8 +162,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 [MBProgressHUD showError:@"暂无数据" toView:self.view];
             }
+            [self.myTableView.mj_header endRefreshing];
         }else{
-            [MBProgressHUD showError:error.description toView:self.view];
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+                [self.myTableView.mj_header endRefreshing];
+            }
         }
     }];
 }

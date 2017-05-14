@@ -32,6 +32,7 @@
 		7129523C1EC208BD005A16F0 /* AddEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */; };
 		7129525C1EC36751005A16F0 /* AddWorkTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */; };
 		7129525F1EC36DD4005A16F0 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7129525E1EC36DD4005A16F0 /* QRCodeViewController.m */; };
+		712952681EC8860D005A16F0 /* StaffInfoMdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952671EC8860D005A16F0 /* StaffInfoMdViewController.m */; };
 		71322E391EC09F0D003E0D23 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 71322E381EC09F0D003E0D23 /* Tools.m */; };
 		71322E3C1EC0AFB1003E0D23 /* DddSeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71322E3B1EC0AFB1003E0D23 /* DddSeviceViewController.m */; };
 		71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */; };
@@ -103,6 +104,8 @@
 		7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWorkTypeViewController.m; sourceTree = "<group>"; };
 		7129525D1EC36DD4005A16F0 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		7129525E1EC36DD4005A16F0 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
+		712952661EC8860D005A16F0 /* StaffInfoMdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffInfoMdViewController.h; sourceTree = "<group>"; };
+		712952671EC8860D005A16F0 /* StaffInfoMdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffInfoMdViewController.m; sourceTree = "<group>"; };
 		71322E371EC09F0D003E0D23 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		71322E381EC09F0D003E0D23 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		71322E3A1EC0AFB1003E0D23 /* DddSeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DddSeviceViewController.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */,
 				7129525D1EC36DD4005A16F0 /* QRCodeViewController.h */,
 				7129525E1EC36DD4005A16F0 /* QRCodeViewController.m */,
+				712952661EC8860D005A16F0 /* StaffInfoMdViewController.h */,
+				712952671EC8860D005A16F0 /* StaffInfoMdViewController.m */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -524,6 +529,7 @@
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,
 				7129523C1EC208BD005A16F0 /* AddEmployeeViewController.m in Sources */,
 				7129525F1EC36DD4005A16F0 /* QRCodeViewController.m in Sources */,
+				712952681EC8860D005A16F0 /* StaffInfoMdViewController.m in Sources */,
 				7109ED4B1EBEF16500C542AC /* FromsMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
