@@ -26,7 +26,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-       
+       _myTableView.separatorColor = [UIColor clearColor];
         [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -78,7 +78,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
     NSDictionary *dic = self.dataSource[indexPath.row];
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH - 210, 4, 200, 40)];
-    lb.text = [dic objectForKey:@"price"];
+    lb.text = [NSString stringWithFormat:@"¥%@",[dic objectForKey:@"price"]];
     lb.textAlignment = NSTextAlignmentRight;
     lb.textColor = [UIColor redColor];
     [bgView addSubview:lb];

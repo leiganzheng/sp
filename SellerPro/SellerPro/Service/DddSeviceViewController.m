@@ -90,13 +90,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     if (indexPath.section == 0) {
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-230, 0, 240, 40)];
         UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-        lb.text = _dataSource1[indexPath.row];
+        NSString *str = _dataSource1[indexPath.row];
+        lb.text = str;
+        lb.text = @"类别";
         lb.textAlignment = NSTextAlignmentRight;
         lb.textColor = [UIColor lightGrayColor];
-         cell.accessoryView = lb;
-        if (indexPath.row == 2) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        [v addSubview:lb];
+        if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            btn.frame = CGRectMake(200, 9, 22, 22);
+            [btn setImage:[UIImage imageNamed:@"home_btn_next"] forState:UIControlStateNormal];
+            btn.backgroundColor = [UIColor clearColor];
+            [v addSubview:btn];
+            
         }
        
     }else{
