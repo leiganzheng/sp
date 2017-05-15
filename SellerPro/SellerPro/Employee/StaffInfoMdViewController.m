@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSArray *flagArr;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 
 @end
@@ -22,7 +23,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-108) style:UITableViewStyleGrouped];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-108) style:UITableViewStylePlain];
         _myTableView.rowHeight = 52;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -54,7 +55,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [btn setTitle:@"保存" forState:UIControlStateNormal];
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+//    [self.view addSubview:btn];
     if (_isWorkType) {
         self.title = @"选择职位";
 //        _dataSource = @[@"洗车工",@"维修工"];
@@ -96,13 +97,19 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     if (indexPath.section == 0) {
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-        lb.textAlignment = NSTextAlignmentRight;
-        lb.textColor = [UIColor lightGrayColor];
-        cell.accessoryView = lb;
-        if (indexPath.row == 2) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
+//        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+//        lb.textAlignment = NSTextAlignmentRight;
+//        lb.textColor = [UIColor lightGrayColor];
+//        cell.accessoryView = lb;
+//        if (indexPath.row == 2) {
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        }
+        UIImageView *redV = [[UIImageView alloc] init];
+        redV.frame = CGRectMake(0, 0, 22, 22);
+        redV.image = [UIImage imageNamed:@"staffmanagement_btn_option_seleted"];
+        [Tools configCornerOfView:redV with:3];
+        cell.accessoryView = redV;
+
         
     }
 //    else{

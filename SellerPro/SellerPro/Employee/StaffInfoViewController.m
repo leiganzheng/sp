@@ -9,6 +9,8 @@
 #import "StaffInfoViewController.h"
 #import "DTMyTableViewCell.h"
 #import "StaffInfoMdViewController.h"
+#import "AuthorSettingViewController.h"
+
 @interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
@@ -72,14 +74,22 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
     myCell.textLabel.text = self.dataSource[indexPath.row];
-    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
+    
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, 40)];
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     lb.text = _dataSource1[indexPath.row];
     lb.textAlignment = NSTextAlignmentRight;
     lb.textColor = [UIColor lightGrayColor];
-    cell.accessoryView = lb;
+    [v addSubview:lb];
+    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(200, 9, 22, 22);
+        [btn setImage:[UIImage imageNamed:@"home_btn_next"] forState:UIControlStateNormal];
+        btn.backgroundColor = [UIColor clearColor];
+        [v addSubview:btn];
+
+    }
+    cell.accessoryView = v;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -94,6 +104,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         vc.isWorkType = NO;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    if (indexPath.row ==4) {
+        AuthorSettingViewController *vc = [[AuthorSettingViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 #pragma mark - private action
 -(void)save:(UIButton *)sender{

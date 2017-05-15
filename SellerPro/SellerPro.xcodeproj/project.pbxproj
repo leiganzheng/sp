@@ -51,6 +51,9 @@
 		BB87F45B1EC173F700D67843 /* SFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */; };
 		BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */; };
 		BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4931EC443D500D67843 /* UITableView+Empty.m */; };
+		BB87F4971EC9782900D67843 /* AuthorSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4961EC9782900D67843 /* AuthorSettingViewController.m */; };
+		BB87F49A1EC98B7100D67843 /* SubSeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4991EC98B7100D67843 /* SubSeviceViewController.m */; };
+		BB87F49D1EC98F7300D67843 /* DetailServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F49C1EC98F7300D67843 /* DetailServiceViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +143,12 @@
 		BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		BB87F4921EC443D500D67843 /* UITableView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Empty.h"; sourceTree = "<group>"; };
 		BB87F4931EC443D500D67843 /* UITableView+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Empty.m"; sourceTree = "<group>"; };
+		BB87F4951EC9782900D67843 /* AuthorSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorSettingViewController.h; sourceTree = "<group>"; };
+		BB87F4961EC9782900D67843 /* AuthorSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorSettingViewController.m; sourceTree = "<group>"; };
+		BB87F4981EC98B7100D67843 /* SubSeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubSeviceViewController.h; sourceTree = "<group>"; };
+		BB87F4991EC98B7100D67843 /* SubSeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubSeviceViewController.m; sourceTree = "<group>"; };
+		BB87F49B1EC98F7300D67843 /* DetailServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailServiceViewController.h; sourceTree = "<group>"; };
+		BB87F49C1EC98F7300D67843 /* DetailServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailServiceViewController.m; sourceTree = "<group>"; };
 		D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +201,8 @@
 				7129525E1EC36DD4005A16F0 /* QRCodeViewController.m */,
 				712952661EC8860D005A16F0 /* StaffInfoMdViewController.h */,
 				712952671EC8860D005A16F0 /* StaffInfoMdViewController.m */,
+				BB87F4951EC9782900D67843 /* AuthorSettingViewController.h */,
+				BB87F4961EC9782900D67843 /* AuthorSettingViewController.m */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -229,6 +240,10 @@
 				7109ED4D1EBEF1AA00C542AC /* ServiceViewController.m */,
 				71322E3A1EC0AFB1003E0D23 /* DddSeviceViewController.h */,
 				71322E3B1EC0AFB1003E0D23 /* DddSeviceViewController.m */,
+				BB87F4981EC98B7100D67843 /* SubSeviceViewController.h */,
+				BB87F4991EC98B7100D67843 /* SubSeviceViewController.m */,
+				BB87F49B1EC98F7300D67843 /* DetailServiceViewController.h */,
+				BB87F49C1EC98F7300D67843 /* DetailServiceViewController.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -499,6 +514,7 @@
 				712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */,
 				7129522A1EC0BD63005A16F0 /* WorkTypeViewController.m in Sources */,
 				712952391EC0BF7A005A16F0 /* StaffInfoViewController.m in Sources */,
+				BB87F4971EC9782900D67843 /* AuthorSettingViewController.m in Sources */,
 				BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */,
 				7109ED5D1EBF4CB200C542AC /* DTNetManger.m in Sources */,
 				7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */,
@@ -516,6 +532,7 @@
 				710FEF581EBEE23C0064CC85 /* main.m in Sources */,
 				71322E391EC09F0D003E0D23 /* Tools.m in Sources */,
 				BB87F4501EC1709500D67843 /* SpersonTableViewCell.m in Sources */,
+				BB87F49D1EC98F7300D67843 /* DetailServiceViewController.m in Sources */,
 				BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
@@ -524,6 +541,7 @@
 				7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */,
 				BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */,
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
+				BB87F49A1EC98B7100D67843 /* SubSeviceViewController.m in Sources */,
 				BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,

@@ -1,25 +1,23 @@
 //
-//  ServiceViewController.m
+//  DetailServiceViewController.m
 //  SellerPro
 //
-//  Created by leiganzheng on 2017/5/7.
+//  Created by leiganzheng on 2017/5/15.
 //  Copyright © 2017年 karashock. All rights reserved.
 //
 
-#import "ServiceViewController.h"
+#import "DetailServiceViewController.h"
 #import "DddSeviceViewController.h"
-#import "SubSeviceViewController.h"
 
-@interface ServiceViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DetailServiceViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
-@property (nonatomic, strong) NSArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
-@implementation ServiceViewController
+@implementation DetailServiceViewController
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
@@ -36,13 +34,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-//- (NSArray *)dataSource
-//{
-//    if (!_dataSource) {
-//        _dataSource = @[@"服务项目-",@"服务项目-",@"服务项目-",@"服务项目-"];
-//    }
-//    return _dataSource;
-//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"服务项目";
@@ -54,7 +46,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [btn setTitle:@"添加新项目" forState:UIControlStateNormal];
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
+    [self.view addSubview:btn];
     [self featchData];
 }
 
@@ -86,34 +78,37 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     redV.frame = CGRectMake(4, 2, 4, 48);
     redV.image = [UIImage imageNamed:@"program_img_strip"];
     [Tools configCornerOfView:redV with:3];
-//    [cell.contentView addSubview:redV];
+    [cell.contentView addSubview:redV];
     
-//    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-//    lb.text = @"¥50.0";
-//    lb.textAlignment = NSTextAlignmentRight;
-//    lb.textColor = [UIColor redColor];
-//     cell.accessoryView = lb;
-//    
-//    cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"删除" icon:[UIImage imageNamed:@""] backgroundColor:[UIColor redColor]]];
-//    cell.leftSwipeSettings.transition = MGSwipeTransition3D;
+    NSDictionary *dic = self.dataSource[indexPath.row];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH - 200, 0, 200, 40)];
+    lb.text = [dic objectForKey:@"price"];
+    lb.textAlignment = NSTextAlignmentRight;
+    lb.textColor = [UIColor redColor];
+    [bgView addSubview:lb];
+    
+    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, 200, 40)];
+    lb1.text = [dic objectForKey:@"name"];
+    lb1.textAlignment = NSTextAlignmentRight;
+    lb1.textColor = [UIColor blackColor];
+    [bgView addSubview:lb1];
+
+        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"删除" icon:[UIImage imageNamed:@""] backgroundColor:[UIColor redColor]]];
+        cell.leftSwipeSettings.transition = MGSwipeTransition3D;
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
     NSDictionary *dic = self.dataSource[indexPath.row];
-    myCell.textLabel.text = [dic objectForKey:@"name"];
-  
-   
+//    myCell.textLabel.text = [dic objectForKey:@"name"];
+    
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     NSDictionary *dic = self.dataSource[indexPath.row];
-    SubSeviceViewController *SVC = [[SubSeviceViewController alloc]init];
-    SVC.dataSource = [NSArray arrayWithArray:[(NSDictionary*)dic objectForKey:@"sub"]];
-    SVC.title = [dic objectForKey:@"name"];
-    [self.navigationController pushViewController:SVC animated:YES];
 }
 #pragma mark - private action
 - (void)add:(UIButton*)sender{
@@ -140,5 +135,3 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }];
 }
 @end
-
-
