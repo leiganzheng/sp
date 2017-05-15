@@ -106,6 +106,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 //        }
         UIImageView *redV = [[UIImageView alloc] init];
         redV.frame = CGRectMake(0, 0, 22, 22);
+        if (!_isWorkType) {
+            NSString *str = ((NSString *)self.dataSource[indexPath.row]).integerValue == 0 ? @"staffmanagement_btn_option_seleted" : @"staffmanagement_btn_option_unseleted";
+            redV.image = [UIImage imageNamed:str];
+        }
         redV.image = [UIImage imageNamed:@"staffmanagement_btn_option_seleted"];
         [Tools configCornerOfView:redV with:3];
         cell.accessoryView = redV;

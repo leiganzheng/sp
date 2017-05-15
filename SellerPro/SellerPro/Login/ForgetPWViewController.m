@@ -27,13 +27,21 @@
     self.title = @"修改密码"; 
     [self setLeftBackNavItem];
     [Tools configCornerOfView:_bgPhone with:3];
-    _bgPhone.backgroundColor = [UIColor clearColor];
     [Tools configCornerOfView:_bgCode with:3];
     [Tools configCornerOfView:_nextStep with:3];
     [Tools configCornerOfView:_codeBtn with:3];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.view addGestureRecognizer:tap];
-    _phoneTF.text = ((AppDelegate*)[UIApplication sharedApplication].delegate).phone;
+    NSString *phoneStr = ((AppDelegate*)[UIApplication sharedApplication].delegate).phone;
+    if (phoneStr.length == 0) {
+        _phoneTF.userInteractionEnabled = YES;
+        _phoneTF.placeholder = @"请输入手机号";
+        _phoneTF.textAlignment = NSTextAlignmentLeft;
+        _phoneTF.font = [UIFont systemFontOfSize:16.0];
+    }else{
+        _phoneTF.text = phoneStr;
+        _bgPhone.backgroundColor = [UIColor clearColor];
+    }
 
 }
 

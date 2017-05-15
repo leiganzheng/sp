@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 #import "DTBaseViewController.h"
 @interface ForgetPWViewController : DTBaseViewController
-
 @end

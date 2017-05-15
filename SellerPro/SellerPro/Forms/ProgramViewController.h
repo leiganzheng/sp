@@ -9,5 +9,6 @@
 #import "DTBaseViewController.h"
 
 @interface ProgramViewController : DTBaseViewController
+-(void)featchDataWithDate:(NSString *)date;
 
 @end

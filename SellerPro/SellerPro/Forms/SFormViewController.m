@@ -106,6 +106,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     myCell.name.text = str;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+- (void)featchDataWithDate:(NSString *)date{
+    self.page = 1;
+    self.date = date;
+    [self featchData];
+}
 -(void)featchData{
     [DTNetManger orderPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" date:self.date callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSArray class]]) {

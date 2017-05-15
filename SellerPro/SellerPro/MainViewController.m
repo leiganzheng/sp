@@ -13,6 +13,7 @@
 #import "ServiceViewController.h"
 #import "ForgetPWViewController.h"
 #import "LoginViewController.h"
+#import "AppDelegate.h"
 
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -148,6 +149,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 #pragma mark - private action
 - (void)logOut:(UIButton *)sender{
+    ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = @"";
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     LoginViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoginViewController"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cvc];

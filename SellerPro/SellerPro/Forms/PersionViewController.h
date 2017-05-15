@@ -9,5 +9,6 @@
 #import "DTBaseViewController.h"
 
 @interface PersionViewController : DTBaseViewController
+-(void)featchDataWithDate:(NSString *)date;
 
 @end

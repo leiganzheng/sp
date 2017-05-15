@@ -121,7 +121,11 @@
                 callBack(nil,arr);
             }
         }else{
-            callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
+            if (code.integerValue == 401) {
+                callBack(nil,[NSArray array]);
+            }else{
+                callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
+            };
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];
@@ -144,7 +148,11 @@
                 callBack(nil,arr);
             }
         }else{
+            if (code.integerValue == 401) {
+                callBack(nil,[NSArray array]);
+            }else{
              callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
+            }
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];
@@ -170,7 +178,11 @@
                 callBack(nil,arr);
             }
         }else{
-             callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
+            if (code.integerValue == 401) {
+                callBack(nil,[NSArray array]);
+            }else{
+                callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
+            }
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];

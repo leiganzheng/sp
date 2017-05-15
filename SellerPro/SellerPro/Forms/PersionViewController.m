@@ -25,11 +25,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 100;
+        _myTableView.rowHeight = 90;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = DT_Base_LineColor;
+        _myTableView.separatorColor =  [UIColor clearColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [self featchData];
             
@@ -83,6 +83,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     myCell.name.text = [dict objectForKey:@"staff"];
     myCell.price.text = [dict objectForKey:@"order_sum"];
     myCell.logo.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"order_count"]];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+- (void)featchDataWithDate:(NSString *)date{
+    self.date = date;
+    self.page = 1;
+    [self featchData];
 }
 -(void)featchData{
     [DTNetManger orderStaffPageWith:[NSString stringWithFormat:@"%ld",(long)self.page] size:@"10" date:self.date callBack:^(NSError *error, id response) {

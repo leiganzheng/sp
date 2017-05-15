@@ -16,6 +16,11 @@
 @interface FromsMViewController () <TabContainerDelegate,TabContainerDataSource,TimeViewControllerDelegate>
 @property (nonatomic) NSUInteger numberOfTabs;
 @property (nonatomic,strong) FPPopoverController*popover;
+@property (nonatomic,strong) UIButton *btn;
+@property (nonatomic,strong)SFormViewController *formVc;
+@property (nonatomic,strong)PersionViewController *personVc;
+@property (nonatomic,strong)ProgramViewController *programVc;
+@property (nonatomic,assign) NSInteger currentIndex;
 @end
 
 @implementation FromsMViewController
@@ -27,14 +32,14 @@
     [self setLeftBackNavItem];
     self.title = @"业绩报表";
     self.numberOfTabs = 3;   ///////当设置数量时，去调用setter方法去加载控件
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"05月" forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"home_btn_dropdown"] forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 44, 44);
-    btn.titleEdgeInsets = UIEdgeInsetsMake(0, -btn.imageView.frame.size.width - btn.frame.size.width + btn.titleLabel.intrinsicContentSize.width, 0, 0);
-    btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -btn.titleLabel.frame.size.width - btn.frame.size.width + btn.imageView.frame.size.width);
-    [btn addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    _btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_btn setTitle:@"2017-04" forState:UIControlStateNormal];
+    [_btn setImage:[UIImage imageNamed:@"home_btn_dropdown"] forState:UIControlStateNormal];
+    _btn.frame = CGRectMake(0, 0, 80, 44);
+    _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
+    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
+    [_btn addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
 }
 
 - (void)setNumberOfTabs:(NSUInteger)numberOfTabs {
@@ -94,15 +99,18 @@
 
 -(UIViewController *)tabContainer:(TabContainerViewController *)tabContainer contentViewControllerForTabAtIndex:(NSUInteger)index {
     if (index == 0) {
-        SFormViewController *cvc = [[SFormViewController alloc] init];
-        return cvc;
+        _formVc = [[SFormViewController alloc] init];
+        return _formVc;
     }else if (index == 1){
-        PersionViewController *cvc = [[PersionViewController alloc] init];
-        return cvc;
+        _personVc = [[PersionViewController alloc] init];
+        return _personVc;
     }else{
-        ProgramViewController *cvc = [[ProgramViewController alloc] init];
-        return cvc;
+        _programVc = [[ProgramViewController alloc] init];
+        return _programVc;
     }
+}
+-(void)tabContainer:(TabContainerViewController *)tabContainer didChangeTabToIndex:(NSUInteger)index{
+    self.currentIndex = index;
 }
 #pragma mark -- private method
 - (void)select:(UIButton*)sender{
@@ -116,7 +124,16 @@
 
 #pragma mark --TimeViewControllerDelegate
 - (void)didSelectedDate:(NSString *)date{
+    [_btn setTitle:date forState:UIControlStateNormal];
     [_popover dismissPopoverAnimated:YES];
+    if (self.currentIndex == 0) {
+        [_formVc featchDataWithDate:date];
+    }else if (self.currentIndex == 1){
+       [_personVc featchDataWithDate:date];
+    }else{
+        [_programVc featchDataWithDate:date];
+    }
+
 }
 #pragma mark --TabContainerDelegate
 -(CGFloat)heightForTabInTabContainer:(TabContainerViewController *)tabContainer {

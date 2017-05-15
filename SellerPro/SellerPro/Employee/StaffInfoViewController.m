@@ -10,6 +10,7 @@
 #import "DTMyTableViewCell.h"
 #import "StaffInfoMdViewController.h"
 #import "AuthorSettingViewController.h"
+#import "StaffInfoTableViewCell.h"
 
 @interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -17,7 +18,7 @@
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) NSArray *dataSource1;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
-
+@property (nonatomic,strong) NSString *flagStr;
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
@@ -31,7 +32,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
 
-        [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+       [_myTableView registerNib:[UINib nibWithNibName:@"StaffInfoTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
@@ -66,18 +67,25 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    StaffInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     
-        return cell;
+    return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
-    myCell.textLabel.text = self.dataSource[indexPath.row];
+    StaffInfoTableViewCell *myCell = (StaffInfoTableViewCell *)cell;
+    myCell.name.text = self.dataSource[indexPath.row];
     
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, 40)];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-230, 0, 240, 40)];
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    lb.text = _dataSource1[indexPath.row];
+    NSString *str = _dataSource1[indexPath.row];
+    lb.text = str;
+    if (indexPath.row == 3) {
+        self.flagStr = str;
+        NSString *temp = str.integerValue ==0 ? @"在职" : @"离职";
+        lb.text = temp;
+    }
+    
     lb.textAlignment = NSTextAlignmentRight;
     lb.textColor = [UIColor lightGrayColor];
     [v addSubview:lb];
@@ -89,7 +97,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         [v addSubview:btn];
 
     }
-    cell.accessoryView = v;
+//    cell.accessoryView = v;
+    [myCell.contentView addSubview:v];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -105,8 +114,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row ==4) {
+        if (self.flagStr.integerValue == 1) {
+            [MBProgressHUD showError:@"离职状态，无法设置权限" toView:self.view];
+        }else{
         AuthorSettingViewController *vc = [[AuthorSettingViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 
 }

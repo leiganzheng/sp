@@ -26,10 +26,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [self featchData];
-            
-        }];
+       
         [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -47,7 +44,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-    [self featchData];
 }
 
 #pragma mark - tableView Delegate
@@ -81,15 +77,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [cell.contentView addSubview:redV];
     
     NSDictionary *dic = self.dataSource[indexPath.row];
-    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH - 200, 0, 200, 40)];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH - 210, 4, 200, 40)];
     lb.text = [dic objectForKey:@"price"];
     lb.textAlignment = NSTextAlignmentRight;
     lb.textColor = [UIColor redColor];
     [bgView addSubview:lb];
     
-    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, 200, 40)];
+    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(8, 4, 200, 40)];
     lb1.text = [dic objectForKey:@"name"];
-    lb1.textAlignment = NSTextAlignmentRight;
+    lb1.textAlignment = NSTextAlignmentLeft;
     lb1.textColor = [UIColor blackColor];
     [bgView addSubview:lb1];
 
@@ -100,8 +96,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
-    NSDictionary *dic = self.dataSource[indexPath.row];
+//    MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
+//    NSDictionary *dic = self.dataSource[indexPath.row];
 //    myCell.textLabel.text = [dic objectForKey:@"name"];
     
     
@@ -115,23 +111,5 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     DddSeviceViewController *vc = [[DddSeviceViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
--(void)featchData{
-    [DTNetManger seviceListWithCallBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
-                [_myTableView reloadData];
-            }else{
-                [MBProgressHUD showError:@"暂无数据" toView:self.view];
-            }
-            [self.myTableView.mj_header endRefreshing];
-        }else{
-            if ([response  isKindOfClass:[NSString class]]) {
-                [MBProgressHUD showError:(NSString *)response toView:self.view];
-                [self.myTableView.mj_header endRefreshing];
-            }
-        }
-    }];
-}
+
 @end

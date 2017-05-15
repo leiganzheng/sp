@@ -9,5 +9,5 @@
 #import "DTBaseViewController.h"
 
 @interface SFormViewController : DTBaseViewController
-
+-(void)featchDataWithDate:(NSString *)date;
 @end

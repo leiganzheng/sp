@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) NSArray *dataSource1;
+@property (nonatomic, strong) NSMutableArray *dataFlag;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 
 @end
@@ -38,6 +39,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     if (!_dataSource1) {
 //        _dataSource = @[@[@"权限一",@"权限二",@"权限三",@"权限四"],@[@"权限一",@"权限二",@"权限三",@"权限四"]];
         _dataSource1 = @[@"权限一",@"权限二",@"权限三",@"权限四"];
+        
     }
     return _dataSource1;
 }
@@ -45,6 +47,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [super viewDidLoad];
     self.title = @"设置权限";
     [self setLeftBackNavItem];
+    _dataFlag = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0", nil];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.myTableView];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -105,22 +108,28 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    UIImageView *redV = [[UIImageView alloc] init];
-    redV.frame = CGRectMake(0, 0, 22, 22);
-        redV.image = [UIImage imageNamed:@"staffmanagement_btn_option_seleted"];
-        [Tools configCornerOfView:redV with:3];
-        cell.accessoryView = redV;
+   
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
     myCell.textLabel.text = self.dataSource1[indexPath.row];
+    UIImageView *redV = [[UIImageView alloc] init];
+    redV.frame = CGRectMake(0, 0, 22, 22);
+    NSString *flag = self.dataFlag[indexPath.row];
+    NSString *str = flag.integerValue == 0 ? @"staffmanagement_btn_option_seleted" : @"staffmanagement_btn_option_unseleted";
+    redV.image = [UIImage imageNamed:str];
+    [Tools configCornerOfView:redV with:3];
+    cell.accessoryView = redV;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    NSString *str = self.dataFlag[indexPath.row];
+    NSString *temp = str.integerValue == 0 ? @"1":@"0";
+    [_dataFlag replaceObjectAtIndex:indexPath.row withObject:temp];
+    [self.myTableView reloadData];
 }
 #pragma mark - private action
 -(void)featchData{
@@ -146,7 +155,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
 }
 - (void)allSelect:(UIButton*)sender{
-    
+    _dataFlag =  [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0", nil];
+    [self.myTableView reloadData];
 }
 @end
 
