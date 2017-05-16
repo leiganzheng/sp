@@ -49,7 +49,9 @@
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).token = dict[@"token"];
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).rtoken = dict[@"refresh_token"];
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = _phoneTF.text;
+                
                 NSString *sum = [NSString stringWithFormat:@"%@",dict[@"token_expires"]];
+//                [self interceptTimeStampFromStr:sum];
                 [((AppDelegate*)[UIApplication sharedApplication].delegate) openCountdown:sum.integerValue];
                 
                 //跳转
@@ -62,6 +64,34 @@
             }
         }];
     }
+}
+- (NSString *)interceptTimeStampFromStr:(NSString *)str{
+    if (!str || [str length] == 0 ) {  // 字符串为空判断
+        return @"";
+    }
+    NSMutableString * muStr = [NSMutableString stringWithString:str];
+    NSString * timeStampString = [NSString string];
+    //  遍历取出括号内的时间戳
+    for (int i = 0; i < str.length; i ++) {
+        NSRange startRang = [muStr rangeOfString:@"("];
+        NSRange endRang = [muStr rangeOfString:@")"];
+        if (startRang.location != NSNotFound) {
+            // 左边括号位置
+            NSInteger loc = startRang.location;
+            // 右边括号距离左边括号的长度
+            NSInteger len = endRang.location - startRang.location;
+            // 截取括号时间戳内容
+            timeStampString = [muStr substringWithRange:NSMakeRange(loc + 1,len - 1)];
+        }
+    }
+    
+    // 把时间戳转化成时间
+    NSTimeInterval interval=[timeStampString doubleValue] / 1000.0;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
+    NSDateFormatter *objDateformat = [[NSDateFormatter alloc] init];
+    [objDateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+    NSString * timeStr = [NSString stringWithFormat:@"%@",[objDateformat stringFromDate: date]];
+    return timeStr;
 }
 - (IBAction)forgetPW:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];

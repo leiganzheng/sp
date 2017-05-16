@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "LoginViewController.h"
 @interface AppDelegate ()<UIAlertViewDelegate>
 
 @end
@@ -63,7 +63,7 @@
 }
 -(void)openCountdown:(NSInteger)sum{
     
-    __block NSInteger time = sum; //倒计时时间
+    __block NSInteger time = sum/1000; //倒计时时间
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
@@ -78,21 +78,12 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Token失效，请重新登录" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
                 [view show];
-                //设置按钮的样式
-//                [self.codeBtn setTitle:@"重新发送" forState:UIControlStateNormal];
-//                [self.codeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//                self.codeBtn.userInteractionEnabled = YES;
             });
             
         }else{
             
             int seconds = time % 60;
             dispatch_async(dispatch_get_main_queue(), ^{
-                
-                //设置按钮显示读秒效果
-//                [self.codeBtn setTitle:[NSString stringWithFormat:@"重新发送(%.2d)", seconds] forState:UIControlStateNormal];
-//                [self.codeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//                self.codeBtn.userInteractionEnabled = NO;
             });
             time--;
         }
@@ -104,6 +95,11 @@
 {
     if (buttonIndex == 1) {
         //处理返回事件
+        self.phone = @"";
+        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+        LoginViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cvc];
+        [Tools enterRootViewController:nav animated:YES];
     }
 }
 @end
