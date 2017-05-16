@@ -72,10 +72,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     if (_isWorkType) {
         self.title = @"选择职位";
         [self featchData];
-//        _dataSource = @[@"洗车工",@"维修工"];
     }else{
         self.title = @"设置工作状态";
-//         _dataSource = @[@"洗车工",@"维修工"];
     }
 }
 -(void)save:(UIButton *)sender{
@@ -124,24 +122,16 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_isWorkType) {
-        for (int i=0;i<_dataFlag.count;i++) {
-            if (i  == indexPath.row) {
-                [_dataFlag addObject:@"0"];
-            }else{
-                [_dataFlag addObject:@"1"];
-            }
-        }
         if (self.delegate) {
-            [self.delegate  didSelectedData: self.dataSource[indexPath.row] withType:YES];
+            NSDictionary *dict = self.dataSource[indexPath.row];
+            [self.delegate  didSelectedData: [dict objectForKey:@"name"] withId:[NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]]];
         }
     }else{
         if (indexPath.row == 0) {
-             _flagArr = @[@"0",@"1"];
             if (self.delegate) {
-                [self.delegate  didSelectedData: @"1" withType:NO];
+                [self.delegate  didSelectedData: @"0" withType:NO];
             }
         }else{
-            _flagArr = @[@"1",@"0"];
             if (self.delegate) {
                 [self.delegate  didSelectedData: @"1" withType:NO];
             }
@@ -161,7 +151,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
                 _dataFlag = [NSMutableArray array];
                  self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
                 for (NSDictionary *dic in self.dataSource) {
-                    NSString *str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"id"]];
+                    NSString *str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]];
                     if ([str isEqualToString:_cusID]) {
                         [_dataFlag addObject:@"0"];
                     }else{

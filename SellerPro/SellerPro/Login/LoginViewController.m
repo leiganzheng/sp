@@ -49,6 +49,9 @@
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).token = dict[@"token"];
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).rtoken = dict[@"refresh_token"];
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = _phoneTF.text;
+                NSString *sum = [NSString stringWithFormat:@"%@",dict[@"token_expires"]];
+                [((AppDelegate*)[UIApplication sharedApplication].delegate) openCountdown:sum.integerValue];
+                
                 //跳转
                 UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
                 MainViewController *main = [board instantiateViewControllerWithIdentifier:@"MainViewController"];

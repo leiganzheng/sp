@@ -11,9 +11,8 @@
 #import "StaffInfoMdViewController.h"
 #import "AuthorSettingViewController.h"
 #import "StaffInfoTableViewCell.h"
-#import "UIViewController+BackButtonHandler.h"
 
-@interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource,StaffInfoMdViewControllerDelegate,UIAlertViewDelegate>
+@interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource,StaffInfoMdViewControllerDelegate,UIAlertViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -23,6 +22,7 @@
 @property (nonatomic,strong) NSString *flagStrH;
 @property (nonatomic,strong)UITextField *nameTF;
 @property(nonatomic,strong) NSString *workStrH;
+@property(nonatomic,strong) NSString *typeID;
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
@@ -51,7 +51,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"员工信息";
-    [self setLeftBackNavItem];
+//    [self setLeftBackNavItem];
     [self.view addSubview:self.myTableView];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, KSCREEN_HEIGHT-108, KSCREEN_WIDTH, 44);
@@ -61,9 +61,24 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.view addSubview:btn];
     [self featchData];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    tap.delegate = self;
     [self.view addGestureRecognizer:tap];
+    
+    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn1.frame = CGRectMake(0, 0, 20, 30);
+    [btn1 setImage:[UIImage imageNamed:@"staffmanagement_btn_back"] forState:UIControlStateNormal];
+    [btn1 addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn1];
 }
+-(void)back{
+    if ([self updateCK]) {
+        UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"是否放弃更改" message:nil delegate:self cancelButtonTitle:@"继续编辑" otherButtonTitles:@"放弃", nil];
+        [view show];
 
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 #pragma mark - tableView Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -81,34 +96,50 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     StaffInfoTableViewCell *myCell = (StaffInfoTableViewCell *)cell;
     myCell.name.text = self.dataSource[indexPath.row];
-    
+    for (UIView *v in myCell.contentView.subviews) {
+        if (v.tag == 100) {
+            [v removeFromSuperview];
+        }
+    }
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-230, 6, 240, 40)];
-    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(2, 6, 200, 40)];
+    v.tag = 100;
     NSString *str = _dataSource1[indexPath.row];
-    lb.text = str;
+   
     if (indexPath.row == 0) {
-        _nameTF = [[UITextField alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-210, 6, 200, 40)];
+        _nameTF = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, 200, 40)];
         NSString *str = _dataSource1[indexPath.row];
-        _nameTF.placeholder = @"输入姓名";
+//        _nameTF.placeholder = @"输入姓名";
         _nameTF.text = str;
         _nameTF.textAlignment = NSTextAlignmentRight;
         _nameTF.textColor = [UIColor lightGrayColor];
-        [cell.contentView addSubview:_nameTF];
+        [v addSubview:_nameTF];
+    }
+    if (indexPath.row == 1) {
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(2, 0, 200, 40)];
+        lb.text = str;
+        lb.textAlignment = NSTextAlignmentRight;
+        lb.textColor = [UIColor lightGrayColor];
+        [v addSubview:lb];
     }
     if (indexPath.row == 2) {
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(2, 0, 200, 40)];
+        lb.textAlignment = NSTextAlignmentRight;
+        lb.textColor = [UIColor lightGrayColor];
+        [v addSubview:lb];
         lb.text = self.workStr;
     }
     if (indexPath.row == 3) {
-        self.flagStr = str;
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(2, 0, 200, 40)];
+        lb.textAlignment = NSTextAlignmentRight;
+        lb.textColor = [UIColor lightGrayColor];
+        [v addSubview:lb];
         lb.text = self.flagStr.integerValue ==0 ? @"在职" : @"离职";
     }
     
-    lb.textAlignment = NSTextAlignmentRight;
-    lb.textColor = [UIColor lightGrayColor];
-    [v addSubview:lb];
+   
     if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(200, 9, 22, 22);
+        btn.frame = CGRectMake(200, 8, 22, 22);
         [btn setImage:[UIImage imageNamed:@"home_btn_next"] forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor clearColor];
         [v addSubview:btn];
@@ -123,13 +154,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     if (indexPath.row ==2) {
         StaffInfoMdViewController *vc = [[StaffInfoMdViewController alloc]init];
         vc.isWorkType = YES;
-        vc.cusID = _dataSource1[indexPath.row];
+        vc.cusID = self.workStr;
+        vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row ==3) {
         StaffInfoMdViewController *vc = [[StaffInfoMdViewController alloc]init];
         vc.isWorkType = NO;
-        vc.cusID = _dataSource1[indexPath.row];
+        vc.cusID = self.flagStr;
+        vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row ==4) {
@@ -152,13 +185,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     [self.myTableView reloadData];
 }
-- (BOOL)navigationShouldPopOnBackButton
-{
-    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"是否放弃更改" message:nil delegate:self cancelButtonTitle:@"继续编辑" otherButtonTitles:@"放弃", nil];
-    [view show];
-    return NO;
+-(void)didSelectedData:(NSString *)data withId:(NSString *)customID{
+    self.workStr = data;
+    self.typeID = customID;
+    [self.myTableView reloadData];
 }
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
@@ -166,22 +197,30 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
+#pragma mark - UIGestureRecognizerDelegate
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+      NSLog(@"%@", NSStringFromClass([touch.view class]));
+    UIView *v = touch.view;
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]||v.tag == 100) {//判断如果点击的是tableView的cell，就把手势给关闭了
+        return NO;//关闭手势
+    }//否则手势存在
+    return YES;
+}
 #pragma mark - private action
 -(void)save:(UIButton *)sender{
-    
+    if (_nameTF.text.length == 0) {
+        [MBProgressHUD showError:@"输入名字" toView:self.view];
+    }
+    [DTNetManger addStaffWith:_staffID work_type_id:self.typeID name:_nameTF.text is_disabled:self.flagStr callBack:^(NSError *error, id response) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 - (BOOL)updateCK{
-    if ([self.nameTF.text isEqualToString:self.dataSource[0]]) {
+    if ([self.nameTF.text isEqualToString:self.dataSource1[0]]&&[self.workStrH isEqualToString:_workStr]&&[self.flagStr isEqualToString:self.flagStrH]) {
         return NO;
+    }else{
+        return YES;
     }
-    if ([self.workStrH isEqualToString:_workStr]) {
-        return NO;
-    }
-    if ([self.flagStr isEqualToString:self.flagStrH]) {
-        return NO;
-    }
-    return YES;
 }
 - (void)tap{
     [_nameTF resignFirstResponder];
@@ -193,6 +232,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
                 NSDictionary *dict = (NSDictionary*)response;
                 _dataSource1 = @[[dict objectForKey:@"name"],[dict objectForKey:@"phone"],[NSString stringWithFormat:@"%@",[dict objectForKey:@"work_type_id"]],[NSString stringWithFormat:@"%@",[dict objectForKey:@"is_disabled"]],@""];
                 self.flagStrH = [NSString stringWithFormat:@"%@",[dict objectForKey:@"is_disabled"]];
+                self.flagStr = self.flagStrH;
                 self.workStrH = self.workStr;
                 [_myTableView reloadData];
             }else{

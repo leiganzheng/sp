@@ -11,7 +11,7 @@
 @protocol StaffInfoMdViewControllerDelegate <NSObject>
 
 - (void)didSelectedData:(NSString *)data withType:(BOOL)falg;
-
+- (void)didSelectedData:(NSString *)data withId:(NSString *)customID;
 @end
 @interface StaffInfoMdViewController : DTBaseViewController
 @property(nonatomic,assign) BOOL isWorkType;

@@ -92,7 +92,17 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     lb1.textColor = [UIColor blackColor];
     [bgView addSubview:lb1];
 
-        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"删除" icon:[UIImage imageNamed:@""] backgroundColor:[UIColor redColor]]];
+        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"删除" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+            NSDictionary *dic = self.dataSource[indexPath.row];
+            [DTNetManger delServiceTypeWith:[dic objectForKey:@"id"] callBack:^(NSError *error, id response) {
+                if (response) {
+                    [MBProgressHUD showError:response toView:self.view];
+                }else{
+                    [self featchData];
+                }
+            }];
+            return  YES;
+        }]];
         cell.leftSwipeSettings.transition = MGSwipeTransition3D;
     
     return cell;
@@ -105,7 +115,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = self.dataSource[indexPath.row];
     DddSeviceViewController *vc = [[DddSeviceViewController alloc] init];
-    vc.cId = self.cateID;
+    vc.cId = self.customID;
     vc.dict = dic;
     [self.navigationController pushViewController:vc animated:YES];
 
@@ -113,7 +123,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - private action
 - (void)add:(UIButton*)sender{
     DddSeviceViewController *vc = [[DddSeviceViewController alloc] init];
-    vc.cId = self.cateID;
+    vc.cId = self.customID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchData{
@@ -140,11 +150,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 [MBProgressHUD showError:@"暂无数据" toView:self.view];
             }
-            [self.myTableView.mj_header endRefreshing];
         }else{
             if ([response  isKindOfClass:[NSString class]]) {
                 [MBProgressHUD showError:(NSString *)response toView:self.view];
-                [self.myTableView.mj_header endRefreshing];
             }
         }
     }];

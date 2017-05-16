@@ -96,7 +96,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(2, 6, 200, 40)];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(4, 6, 200, 40)];
     lb.text = _dataSource[indexPath.row];
     lb.textAlignment = NSTextAlignmentLeft;
     lb.textColor = [UIColor lightGrayColor];

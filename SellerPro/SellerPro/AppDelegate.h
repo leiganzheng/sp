@@ -14,6 +14,6 @@
 @property (strong, nonatomic)NSString* token;
 @property (strong, nonatomic)NSString* rtoken;
 @property (strong, nonatomic)NSString* phone;
-
+- (void)openCountdown:(NSInteger)sum;
 @end
 

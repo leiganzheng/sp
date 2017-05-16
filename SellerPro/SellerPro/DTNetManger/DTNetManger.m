@@ -369,7 +369,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                          serviceId,@"service_id",
                          nil];
-    [HYBNetworking postWithUrl:kDTStaffdelUrl refreshCache:YES params:dic success:^(id response) {
+    [HYBNetworking postWithUrl:kDTSdelUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
@@ -377,7 +377,8 @@
                 callBack(nil,nil);
             }
         }else{
-            [DTNetManger requestFailedCallBack:callBack];
+            callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
+            
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];
