@@ -15,8 +15,9 @@
 @interface StaffViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSArray *iconSource;
+@property (nonatomic, assign) NSInteger page;
 
 @end
 
@@ -32,8 +33,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = [UIColor clearColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            self.page = 1;
             [self featchData];
             
+        }];
+        _myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self featchData];
         }];
         [_myTableView registerNib:[UINib nibWithNibName:@"EmployeeTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
@@ -50,7 +55,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
-   
+   self.page = 1;
     [self featchData];
 }
 
@@ -110,20 +115,34 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchData{
-    [DTNetManger StaffPageWith:@"1" size:@"10" callBack:^(NSError *error, id response) {
+    [DTNetManger StaffPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSArray class]]) {
             NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                 self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
-                 [_myTableView reloadData];
+            if (self.page == 1) {
+                self.dataSource = [[NSMutableArray alloc] init];
+                [self.dataSource removeAllObjects];
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_header endRefreshing];
             }else{
-                 [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    self.page = self.page + 1;
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_footer endRefreshing];
             }
-            [self.myTableView.mj_header endRefreshing];
         }else{
             if ([response  isKindOfClass:[NSString class]]) {
                 [MBProgressHUD showError:(NSString *)response toView:self.view];
                 [self.myTableView.mj_header endRefreshing];
+                [self.myTableView.mj_footer endRefreshing];
             }
         }
     }];

@@ -31,9 +31,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = [UIColor clearColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            self.page = 1;
             [self featchData];
             
         }];
+        _myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self featchData];
+        }];
+
        [_myTableView registerNib:[UINib nibWithNibName:@"SprogramTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -109,6 +114,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 if (arr.count>0) {
                     [self.dataSource addObjectsFromArray:arr];
+                    self.page = self.page + 1;
                     [_myTableView reloadData];
                 }else{
                     [MBProgressHUD showError:@"暂无数据" toView:self.view];
@@ -120,6 +126,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             if ([response  isKindOfClass:[NSString class]]) {
                 [MBProgressHUD showError:(NSString *)response toView:self.view];
                  [self.myTableView.mj_header endRefreshing];
+                [self.myTableView.mj_footer endRefreshing];
             }
         }
 
