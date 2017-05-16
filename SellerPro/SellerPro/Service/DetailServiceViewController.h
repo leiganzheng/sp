@@ -12,4 +12,6 @@
 @interface DetailServiceViewController : DTBaseViewController
 @property (nonatomic,strong) NSArray *dataSource;
 @property (nonatomic,strong) NSString *myTitle;
+@property (nonatomic,strong) NSString *customID;
+@property (nonatomic,strong) NSString *cateID;
 @end

@@ -10,5 +10,6 @@
 #import "DTBaseViewController.h"
 
 @interface DddSeviceViewController : DTBaseViewController
-
+@property (nonatomic,strong)NSString *cId;
+@property (nonatomic,strong)NSDictionary *dict;
 @end

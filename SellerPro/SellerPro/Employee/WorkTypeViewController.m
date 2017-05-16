@@ -162,11 +162,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 [MBProgressHUD showError:@"暂无数据" toView:self.view];
             }
-            [self.myTableView.mj_header endRefreshing];
         }else{
             if ([response  isKindOfClass:[NSString class]]) {
                 [MBProgressHUD showError:(NSString *)response toView:self.view];
-                [self.myTableView.mj_header endRefreshing];
             }
         }
     }];

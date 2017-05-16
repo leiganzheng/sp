@@ -12,4 +12,5 @@
 @interface SubSeviceViewController : DTBaseViewController
 @property (nonatomic,strong) NSArray *dataSource;
 @property (nonatomic,strong) NSString *myTitle;
+@property (nonatomic,strong) NSString *customID;
 @end

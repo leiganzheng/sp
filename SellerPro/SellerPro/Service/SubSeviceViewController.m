@@ -40,7 +40,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.view addSubview:self.myTableView];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, KSCREEN_HEIGHT-108, KSCREEN_WIDTH, 44);
-    [btn setTitle:@"添加新项目" forState:UIControlStateNormal];
+    [btn setTitle:@"添加新服务" forState:UIControlStateNormal];
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:btn];
@@ -99,13 +99,16 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = self.dataSource[indexPath.row];
     DetailServiceViewController *SVC = [[DetailServiceViewController alloc]init];
-    SVC.dataSource = [NSArray arrayWithArray:[(NSDictionary*)dic objectForKey:@"service"]];
+//    SVC.dataSource = [NSArray arrayWithArray:[(NSDictionary*)dic objectForKey:@"service"]];
     SVC.title =  [dic objectForKey:@"name"];
+     SVC.customID =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"id"]];
+    SVC.cateID = self.customID;
     [self.navigationController pushViewController:SVC animated:YES];
 }
 #pragma mark - private action
 - (void)add:(UIButton*)sender{
     DddSeviceViewController *vc = [[DddSeviceViewController alloc] init];
+    vc.cId = self.customID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

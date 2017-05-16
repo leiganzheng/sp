@@ -12,7 +12,7 @@
 #import "AuthorSettingViewController.h"
 #import "StaffInfoTableViewCell.h"
 
-@interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource,StaffInfoMdViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -80,10 +80,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     NSString *str = _dataSource1[indexPath.row];
     lb.text = str;
+    if (indexPath.row == 2) {
+        lb.text = self.workStr;
+    }
     if (indexPath.row == 3) {
         self.flagStr = str;
-        NSString *temp = str.integerValue ==0 ? @"在职" : @"离职";
-        lb.text = temp;
+        lb.text = self.flagStr.integerValue ==0 ? @"在职" : @"离职";
     }
     
     lb.textAlignment = NSTextAlignmentRight;
@@ -106,14 +108,18 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     if (indexPath.row ==2) {
         StaffInfoMdViewController *vc = [[StaffInfoMdViewController alloc]init];
         vc.isWorkType = YES;
+        vc.cusID = _dataSource1[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row ==3) {
         StaffInfoMdViewController *vc = [[StaffInfoMdViewController alloc]init];
         vc.isWorkType = NO;
+        vc.cusID = _dataSource1[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row ==4) {
+         [MBProgressHUD showError:@"功能开发中" toView:self.view];
+        return ;
         if (self.flagStr.integerValue == 1) {
             [MBProgressHUD showError:@"离职状态，无法设置权限" toView:self.view];
         }else{
@@ -122,6 +128,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         }
     }
 
+}
+-(void)didSelectedData:(NSString *)data withType:(BOOL)falg{
+    if (falg) {
+        self.workStr = data;
+    }else{
+        self.flagStr = data;
+    }
+    [self.myTableView reloadData];
 }
 #pragma mark - private action
 -(void)save:(UIButton *)sender{

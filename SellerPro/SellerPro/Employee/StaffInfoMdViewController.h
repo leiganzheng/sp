@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DTBaseViewController.h"
+@protocol StaffInfoMdViewControllerDelegate <NSObject>
 
+- (void)didSelectedData:(NSString *)data withType:(BOOL)falg;
+
+@end
 @interface StaffInfoMdViewController : DTBaseViewController
 @property(nonatomic,assign) BOOL isWorkType;
+@property(nonatomic,assign) NSString *cusID;
+@property(assign,nonatomic)id<StaffInfoMdViewControllerDelegate> delegate;
 @end

@@ -327,11 +327,11 @@
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
-                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
-                callBack(nil,arr);
+                NSDictionary *dict = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,dict);
             }
         }else{
-            [DTNetManger requestFailedCallBack:callBack];
+             callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];
@@ -346,19 +346,15 @@
              callBack:(callBack)callBack{
     [Tools configOrignNetWork];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         service_id,@"service_id",
-                         categoryId,@"category_id",
                          name,@"name",
-                         price,@"is_disabled",
+                         price,@"price",
+                          categoryId,@"category_id",
+                         service_id,@"service_id",
                          nil];
     [HYBNetworking postWithUrl:kDTSsaveUrl refreshCache:YES params:dic success:^(id response) {
-        NSString *code = [(NSDictionary*)response objectForKey:@"code"];
-        if (code.integerValue == 0) {
-            if (callBack) {
-                callBack(nil,nil);
-            }
-        }else{
-            [DTNetManger requestFailedCallBack:callBack];
+        NSString *code = [NSString stringWithFormat:@"%@",[(NSDictionary*)response objectForKey:@"code"]];
+        if (callBack) {
+            callBack(nil,code);
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];

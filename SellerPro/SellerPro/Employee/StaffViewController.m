@@ -101,6 +101,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSDictionary *dict = self.dataSource[indexPath.row];
     StaffInfoViewController *cvc = [[StaffInfoViewController alloc] init];
     cvc.staffID = [NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]];
+    cvc.workStr = [dict objectForKey:@"work_type"];
     [self.navigationController pushViewController:cvc animated:YES];
 }
 - (void)save:(UIButton *)sender{

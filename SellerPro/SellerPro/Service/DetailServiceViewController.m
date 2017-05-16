@@ -45,7 +45,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [btn addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self featchData];
+}
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -96,20 +99,56 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
-//    NSDictionary *dic = self.dataSource[indexPath.row];
-//    myCell.textLabel.text = [dic objectForKey:@"name"];
-    
-    
-}
+   }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *dic = self.dataSource[indexPath.row];
+    DddSeviceViewController *vc = [[DddSeviceViewController alloc] init];
+    vc.cId = self.cateID;
+    vc.dict = dic;
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 #pragma mark - private action
 - (void)add:(UIButton*)sender{
     DddSeviceViewController *vc = [[DddSeviceViewController alloc] init];
+    vc.cId = self.cateID;
     [self.navigationController pushViewController:vc animated:YES];
 }
+-(void)featchData{
+    [DTNetManger seviceListWithCallBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)response;
+            if (arr.count>0) {
+                NSArray *arr = [NSArray arrayWithArray:(NSArray*)response];
+                if (arr.count >0) {
+                    for (NSDictionary *dict in arr) {
+                        NSString *tempId = [NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]];
+                        if ([tempId isEqualToString:self.cateID]) {
+                            NSArray *arrSub = [NSArray arrayWithArray:[(NSDictionary*)dict objectForKey:@"sub"]];
+                            for (NSDictionary *dicSub in arrSub) {
+                                NSString *tempIdSub = [NSString stringWithFormat:@"%@",[dicSub objectForKey:@"id"]];
+                                if ([tempIdSub isEqualToString:self.customID]) {
+                                    _dataSource = [NSArray arrayWithArray:[(NSDictionary*)dicSub objectForKey:@"service"]];
+                                }
+                            }
+                        }
+                    }
+                }
+                [_myTableView reloadData];
+            }else{
+                [MBProgressHUD showError:@"暂无数据" toView:self.view];
+            }
+            [self.myTableView.mj_header endRefreshing];
+        }else{
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+                [self.myTableView.mj_header endRefreshing];
+            }
+        }
+    }];
+}
+
 
 @end

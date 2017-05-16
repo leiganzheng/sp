@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) NSArray *flagArr;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
+@property (nonatomic, strong) NSMutableArray *dataFlag;
 
 @end
 
@@ -43,9 +44,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_dataSource) {
         if (_isWorkType) {
-            _dataSource = @[@"洗车工",@"维修工"];
+//            _dataSource = @[@"洗车工",@"维修工"];
         }else{
             _dataSource = @[@"在职",@"离职"];
+            if (_cusID.integerValue == 0) {
+                 _flagArr = @[@"0",@"1"];
+            }else{
+                _flagArr = @[@"1",@"0"];
+            }
+           
         }
     }
     return _dataSource;
@@ -64,6 +71,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 //    [self.view addSubview:btn];
     if (_isWorkType) {
         self.title = @"选择职位";
+        [self featchData];
 //        _dataSource = @[@"洗车工",@"维修工"];
     }else{
         self.title = @"设置工作状态";
@@ -80,68 +88,99 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     return self.dataSource.count;
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    if (section ==0) {
-//        return  0.01;
-//    }else{
-//        return 40;
-//    }
-//}
-//-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-//    if (section ==0) {
-//        return  @"";
-//    }else{
-//        return @"请指定权限组";
-//    }
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    return 0.01;
-//}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     if (indexPath.section == 0) {
-//        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-//        lb.textAlignment = NSTextAlignmentRight;
-//        lb.textColor = [UIColor lightGrayColor];
-//        cell.accessoryView = lb;
-//        if (indexPath.row == 2) {
-//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        }
         UIImageView *redV = [[UIImageView alloc] init];
         redV.frame = CGRectMake(0, 0, 22, 22);
         if (!_isWorkType) {
-            NSString *str = ((NSString *)self.dataSource[indexPath.row]).integerValue == 0 ? @"staffmanagement_btn_option_seleted" : @"staffmanagement_btn_option_unseleted";
+            NSString *str = ((NSString *)self.flagArr[indexPath.row]).integerValue == 0 ? @"staffmanagement_btn_option_seleted" : @"staffmanagement_btn_option_unseleted";
+            redV.image = [UIImage imageNamed:str];
+        }else{
+            NSString *flag = self.dataFlag[indexPath.row];
+            NSString *str = flag.integerValue == 0 ? @"staffmanagement_btn_option_seleted" : @"staffmanagement_btn_option_unseleted";
             redV.image = [UIImage imageNamed:str];
         }
-        redV.image = [UIImage imageNamed:@"staffmanagement_btn_option_seleted"];
         [Tools configCornerOfView:redV with:3];
         cell.accessoryView = redV;
 
         
     }
-//    else{
-//        UIImageView *redV = [[UIImageView alloc] init];
-//        redV.frame = CGRectMake(0, 0, 22, 22);
-//        redV.image = [UIImage imageNamed:@"staffmanagement_btn_option_seleted"];
-//        [Tools configCornerOfView:redV with:3];
-//        cell.accessoryView = redV;
-//    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
-    myCell.textLabel.text = self.dataSource[indexPath.row];
+    if (_isWorkType) {
+        NSDictionary *dict = self.dataSource[indexPath.row];
+        myCell.textLabel.text = [dict objectForKey:@"name"];
+    }else{
+        myCell.textLabel.text = self.dataSource[indexPath.row];
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (_isWorkType) {
+        for (int i=0;i<_dataFlag.count;i++) {
+            if (i  == indexPath.row) {
+                [_dataFlag addObject:@"0"];
+            }else{
+                [_dataFlag addObject:@"1"];
+            }
+        }
+        if (self.delegate) {
+            [self.delegate  didSelectedData: self.dataSource[indexPath.row] withType:YES];
+        }
+    }else{
+        if (indexPath.row == 0) {
+             _flagArr = @[@"0",@"1"];
+            if (self.delegate) {
+                [self.delegate  didSelectedData: @"1" withType:NO];
+            }
+        }else{
+            _flagArr = @[@"1",@"0"];
+            if (self.delegate) {
+                [self.delegate  didSelectedData: @"1" withType:NO];
+            }
+        }
+        
+    }
+    [self.myTableView reloadData];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 #pragma mark - private action
+-(void)featchData{
+    [DTNetManger workStypeListWithCallBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)response;
+            if (arr.count>0) {
+                _dataFlag = [NSMutableArray array];
+                 self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
+                for (NSDictionary *dic in self.dataSource) {
+                    NSString *str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"id"]];
+                    if ([str isEqualToString:_cusID]) {
+                        [_dataFlag addObject:@"0"];
+                    }else{
+                        [_dataFlag addObject:@"1"];
+                    }
+                }
+                _myTableView.frame = CGRectMake(0, 0, KSCREEN_WIDTH, 52*self.dataSource.count) ;
+            }else{
+                [MBProgressHUD showError:@"暂无数据" toView:self.view];
+            }
+            [self.myTableView reloadData];
+        }else{
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+                
+            }
+        }
+    }];
+}
 
 @end
 
