@@ -11,4 +11,5 @@
 @interface StaffInfoViewController : DTBaseViewController
 @property(nonatomic,strong) NSString *staffID;
 @property(nonatomic,strong) NSString *workStr;
+
 @end

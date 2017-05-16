@@ -11,14 +11,18 @@
 #import "StaffInfoMdViewController.h"
 #import "AuthorSettingViewController.h"
 #import "StaffInfoTableViewCell.h"
+#import "UIViewController+BackButtonHandler.h"
 
-@interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource,StaffInfoMdViewControllerDelegate>
+@interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource,StaffInfoMdViewControllerDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) NSArray *dataSource1;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (nonatomic,strong) NSString *flagStr;
+@property (nonatomic,strong) NSString *flagStrH;
+@property (nonatomic,strong)UITextField *nameTF;
+@property(nonatomic,strong) NSString *workStrH;
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
@@ -56,6 +60,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     [self featchData];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self.view addGestureRecognizer:tap];
 }
 
 #pragma mark - tableView Delegate
@@ -76,10 +82,19 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     StaffInfoTableViewCell *myCell = (StaffInfoTableViewCell *)cell;
     myCell.name.text = self.dataSource[indexPath.row];
     
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-230, 0, 240, 40)];
-    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-230, 6, 240, 40)];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(2, 6, 200, 40)];
     NSString *str = _dataSource1[indexPath.row];
     lb.text = str;
+    if (indexPath.row == 0) {
+        _nameTF = [[UITextField alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-210, 6, 200, 40)];
+        NSString *str = _dataSource1[indexPath.row];
+        _nameTF.placeholder = @"输入姓名";
+        _nameTF.text = str;
+        _nameTF.textAlignment = NSTextAlignmentRight;
+        _nameTF.textColor = [UIColor lightGrayColor];
+        [cell.contentView addSubview:_nameTF];
+    }
     if (indexPath.row == 2) {
         lb.text = self.workStr;
     }
@@ -137,9 +152,39 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     [self.myTableView reloadData];
 }
+- (BOOL)navigationShouldPopOnBackButton
+{
+    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"是否放弃更改" message:nil delegate:self cancelButtonTitle:@"继续编辑" otherButtonTitles:@"放弃", nil];
+    [view show];
+    return NO;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        //处理返回事件
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 #pragma mark - private action
 -(void)save:(UIButton *)sender{
     
+}
+- (BOOL)updateCK{
+    if ([self.nameTF.text isEqualToString:self.dataSource[0]]) {
+        return NO;
+    }
+    if ([self.workStrH isEqualToString:_workStr]) {
+        return NO;
+    }
+    if ([self.flagStr isEqualToString:self.flagStrH]) {
+        return NO;
+    }
+    return YES;
+}
+- (void)tap{
+    [_nameTF resignFirstResponder];
 }
 -(void)featchData{
     if (self.staffID&&self.staffID.length != 0) {
@@ -147,6 +192,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             if (response && [response isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dict = (NSDictionary*)response;
                 _dataSource1 = @[[dict objectForKey:@"name"],[dict objectForKey:@"phone"],[NSString stringWithFormat:@"%@",[dict objectForKey:@"work_type_id"]],[NSString stringWithFormat:@"%@",[dict objectForKey:@"is_disabled"]],@""];
+                self.flagStrH = [NSString stringWithFormat:@"%@",[dict objectForKey:@"is_disabled"]];
+                self.workStrH = self.workStr;
                 [_myTableView reloadData];
             }else{
                 if ([response  isKindOfClass:[NSString class]]) {

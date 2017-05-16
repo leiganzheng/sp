@@ -96,14 +96,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(2, 0, 200, 40)];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(2, 6, 200, 40)];
     lb.text = _dataSource[indexPath.row];
     lb.textAlignment = NSTextAlignmentLeft;
     lb.textColor = [UIColor lightGrayColor];
     [cell.contentView addSubview:lb];
 
         if (indexPath.row == 0) {
-            _nameTF = [[UITextField alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-210, 0, 200, 40)];
+            _nameTF = [[UITextField alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-210, 6, 200, 40)];
             NSString *str = _dataSource1[indexPath.row];
             _nameTF.placeholder = @"输入姓名";
             _nameTF.text = str;
@@ -112,7 +112,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
              [cell.contentView addSubview:_nameTF];
         }
         if (indexPath.row == 1) {
-            _priceTF = [[UITextField alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-210, 0, 200, 40)];
+            _priceTF = [[UITextField alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-210, 6, 200, 40)];
             NSString *str = _dataSource1[indexPath.row];
             _priceTF.text = str;
             _priceTF.placeholder = @"输入价格";
