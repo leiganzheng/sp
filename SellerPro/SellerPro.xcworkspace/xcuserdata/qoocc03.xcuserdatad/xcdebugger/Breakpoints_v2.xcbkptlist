@@ -484,7 +484,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516697401.786319"
+                  timestampString = "516703201.542434"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "354"
@@ -499,7 +499,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516697401.787805"
+                  timestampString = "516703201.543835"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "354"
@@ -580,7 +580,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/Service/DddSeviceViewController.m"
-                  timestampString = "516697401.835228"
+                  timestampString = "516703201.552941"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "74"
@@ -595,7 +595,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/Service/DddSeviceViewController.m"
-                  timestampString = "516697401.836759"
+                  timestampString = "516703201.554333"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "75"
@@ -708,7 +708,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516697401.850907"
+                  timestampString = "516703201.557553"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "419"
@@ -723,7 +723,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/qoocc03/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516697401.852382"
+                  timestampString = "516703201.558919"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "420"
@@ -804,11 +804,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/Login/LoginViewController.m"
-            timestampString = "516698234.20442"
+            timestampString = "516703020.6182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "-loginAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -816,15 +816,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/Login/LoginViewController.m"
-            timestampString = "516698234.20442"
+            timestampString = "516703345.925784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "-interceptTimeStampFromStr:"
             landmarkType = "7">
          </BreakpointContent>
@@ -832,16 +832,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SellerPro/AppDelegate.m"
+            timestampString = "516702714.992887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-openCountdown:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SellerPro/AppDelegate.m"
+            timestampString = "516702714.992887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "-openCountdown:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SellerPro/AppDelegate.m"
+            timestampString = "516702714.992887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-openCountdown:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/Login/LoginViewController.m"
-            timestampString = "516698234.20442"
+            timestampString = "516703020.6182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "-loginAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SellerPro/AppDelegate.m"
+            timestampString = "516702714.992887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-openCountdown:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -852,7 +916,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/AppDelegate.m"
-            timestampString = "516698234.20442"
+            timestampString = "516702714.992887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
@@ -868,60 +932,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/AppDelegate.m"
-            timestampString = "516698234.20442"
+            timestampString = "516702714.992887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-openCountdown:"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-function"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SellerPro/AppDelegate.m"
-            timestampString = "516698234.20442"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "-openCountdown:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/Login/LoginViewController.m"
-            timestampString = "516698234.20442"
+            timestampString = "516703009.11643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-loginAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SellerPro/AppDelegate.m"
-            timestampString = "516698234.20442"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "-openCountdown:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

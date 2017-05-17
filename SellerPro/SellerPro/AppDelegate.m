@@ -64,6 +64,7 @@
 -(void)openCountdown:(NSInteger)sum{
     [_myTimer invalidate];
     _myTimer =nil;
+//    assert(sum == 0);
     _myTimer = [NSTimer scheduledTimerWithTimeInterval:sum target:self selector:@selector(function) userInfo:nil repeats:NO];
 //    __block NSInteger time = sum; //倒计时时间
 //    
@@ -101,6 +102,8 @@
     if (buttonIndex == 0) {
         //处理返回事件
         self.phone = @"";
+        [self.myTimer invalidate];
+        self.myTimer  = nil;
         UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
         LoginViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoginViewController"];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cvc];

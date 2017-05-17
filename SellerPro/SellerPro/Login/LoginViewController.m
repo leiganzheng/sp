@@ -53,12 +53,18 @@
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = _phoneTF.text;
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).logo = dict[@"logo"];
                 
-                NSString *sum = [NSString stringWithFormat:@"%@",dict[@"token_expires"]];
-               
-                NSTimeInterval time=[sum doubleValue];
+//                NSString *sum = [NSString stringWithFormat:@"%@",[dict[@"token_expires"] integerValue]];
+                NSTimeInterval time=[dict[@"token_expires"] doubleValue];
                 NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
-//                NSLog(@"date:%li",(long)[self interceptTimeStampFromStr:detaildate]);
-                [((AppDelegate*)[UIApplication sharedApplication].delegate) openCountdown:[self interceptTimeStampFromStr:detaildate]];
+                NSInteger i = [self interceptTimeStampFromStr:detaildate];
+//                if (time == 0) {
+//                    NSLog(@"------sum1=%f----",time);
+//                }else{
+//                    NSLog(@"-----sum2=%f----",time);
+//                }
+//                NSLog(@"----sum=%f,detaildate=%@,i=%i----",time,detaildate,i);
+                
+                [((AppDelegate*)[UIApplication sharedApplication].delegate) openCountdown:i];
                 
                 //跳转
                 UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
@@ -90,7 +96,9 @@
     | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     // 对比时间差
     NSDateComponents *dateCom = [calendar components:unit fromDate:nowDate toDate:expireDate options:0];
-    return dateCom.second+dateCom.hour*60*60+dateCom.minute*60;
+    NSInteger sum = (dateCom.second)+(dateCom.minute*60)+(dateCom.hour*60*60)+(dateCom.day*24*60*60)+(dateCom.year*365*24*60*60);
+//    NSLog(@"interceptTimeStampFromStr=%li ---  dateCom:%@",(long)sum,dateCom);
+    return sum;
 }
 - (IBAction)forgetPW:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
