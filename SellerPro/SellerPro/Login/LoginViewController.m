@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *login;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UITextField *pwTF;
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
 
 @end
 
@@ -27,6 +28,7 @@
     [Tools configCornerOfView:_login with:3];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.view addGestureRecognizer:tap];
+    [self.logo sd_setImageWithURL:[NSURL URLWithString:((AppDelegate*)[UIApplication sharedApplication].delegate).logo] placeholderImage:[UIImage imageNamed:@"LOGO"] options:SDWebImageProgressiveDownload];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,10 +51,14 @@
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).token = dict[@"token"];
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).rtoken = dict[@"refresh_token"];
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = _phoneTF.text;
+                ((AppDelegate*)[UIApplication sharedApplication].delegate).logo = dict[@"logo"];
                 
                 NSString *sum = [NSString stringWithFormat:@"%@",dict[@"token_expires"]];
-//                [self interceptTimeStampFromStr:sum];
-                [((AppDelegate*)[UIApplication sharedApplication].delegate) openCountdown:sum.integerValue];
+               
+                NSTimeInterval time=[sum doubleValue];
+                NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+//                NSLog(@"date:%li",(long)[self interceptTimeStampFromStr:detaildate]);
+                [((AppDelegate*)[UIApplication sharedApplication].delegate) openCountdown:[self interceptTimeStampFromStr:detaildate]];
                 
                 //跳转
                 UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
@@ -65,33 +71,26 @@
         }];
     }
 }
-- (NSString *)interceptTimeStampFromStr:(NSString *)str{
-    if (!str || [str length] == 0 ) {  // 字符串为空判断
-        return @"";
-    }
-    NSMutableString * muStr = [NSMutableString stringWithString:str];
-    NSString * timeStampString = [NSString string];
-    //  遍历取出括号内的时间戳
-    for (int i = 0; i < str.length; i ++) {
-        NSRange startRang = [muStr rangeOfString:@"("];
-        NSRange endRang = [muStr rangeOfString:@")"];
-        if (startRang.location != NSNotFound) {
-            // 左边括号位置
-            NSInteger loc = startRang.location;
-            // 右边括号距离左边括号的长度
-            NSInteger len = endRang.location - startRang.location;
-            // 截取括号时间戳内容
-            timeStampString = [muStr substringWithRange:NSMakeRange(loc + 1,len - 1)];
-        }
-    }
-    
-    // 把时间戳转化成时间
-    NSTimeInterval interval=[timeStampString doubleValue] / 1000.0;
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
-    NSDateFormatter *objDateformat = [[NSDateFormatter alloc] init];
-    [objDateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
-    NSString * timeStr = [NSString stringWithFormat:@"%@",[objDateformat stringFromDate: date]];
-    return timeStr;
+- (NSInteger)interceptTimeStampFromStr:(NSDate *)str{
+    NSDate *nowDate = [NSDate date];
+    NSDateFormatter *dateFomatter = [[NSDateFormatter alloc] init];
+    dateFomatter.dateFormat = @"yyyy-MM-dd HH:mm:ss.0";
+    // 截止时间字符串格式
+    // 当前时间字符串格式
+    NSString *nowDateStr = [dateFomatter stringFromDate:nowDate];
+    // 截止时间data格式
+    NSString *expireDateStr = [dateFomatter stringFromDate:str];
+    // 当前时间data格式
+    NSDate *expireDate = [dateFomatter dateFromString:expireDateStr];
+    nowDate = [dateFomatter dateFromString:nowDateStr];
+    // 当前日历
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    // 需要对比的时间数据
+    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth
+    | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    // 对比时间差
+    NSDateComponents *dateCom = [calendar components:unit fromDate:nowDate toDate:expireDate options:0];
+    return dateCom.second+dateCom.hour*60*60+dateCom.minute*60;
 }
 - (IBAction)forgetPW:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];

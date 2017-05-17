@@ -28,7 +28,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = DT_Base_LineColor;
+        _myTableView.separatorColor = [UIColor clearColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             self.page = 1;
             [self featchData];
@@ -37,18 +37,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             [self featchData];
         }];
-
+        _myTableView.mj_footer.hidden = YES;
+      
        [_myTableView registerNib:[UINib nibWithNibName:@"SFormTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
-//- (NSArray *)dataSource
-//{
-//    if (!_dataSource) {
-//        _dataSource = @[@[@"抛光打蜡",@"员工管理",@"服务项目",@"密码设置"],@[@"抛光打蜡",@"员工管理"]];
-//    }
-//    return _dataSource;
-//}
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
@@ -68,7 +62,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
      [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return self.dataSource.count;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -129,6 +123,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
                 [self.dataSource removeAllObjects];
                 if (arr.count>0) {
                     [self.dataSource addObjectsFromArray:arr];
+                    if (arr.count>10) {
+                        self.page ++;
+                        _myTableView.mj_footer.hidden = NO;
+                    }else{
+                        _myTableView.mj_footer.hidden = YES;
+                    }
                     [_myTableView reloadData];
                 }else{
                     [MBProgressHUD showError:@"暂无数据" toView:self.view];
@@ -137,7 +137,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 if (arr.count>0) {
                     [self.dataSource addObjectsFromArray:arr];
-                    self.page = self.page + 1;
+                    if (arr.count>10) {
+                        self.page ++;
+                        _myTableView.mj_footer.hidden = NO;
+                    }else{
+                        _myTableView.mj_footer.hidden = YES;
+                    }
                     [_myTableView reloadData];
                 }else{
                     [MBProgressHUD showError:@"暂无数据" toView:self.view];

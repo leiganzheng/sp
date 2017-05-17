@@ -150,6 +150,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - private action
 - (void)logOut:(UIButton *)sender{
     ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = @"";
+    [((AppDelegate*)[UIApplication sharedApplication].delegate).myTimer invalidate];
+    ((AppDelegate*)[UIApplication sharedApplication].delegate).myTimer = nil;
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     LoginViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoginViewController"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cvc];

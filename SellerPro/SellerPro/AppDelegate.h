@@ -14,6 +14,8 @@
 @property (strong, nonatomic)NSString* token;
 @property (strong, nonatomic)NSString* rtoken;
 @property (strong, nonatomic)NSString* phone;
+@property (strong, nonatomic)NSString* logo;
+@property(nonatomic,strong) NSTimer *myTimer;
 - (void)openCountdown:(NSInteger)sum;
 @end
 
