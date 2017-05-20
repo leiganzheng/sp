@@ -77,11 +77,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     
-    UIView *bgView = [[UIView alloc] init];
-    bgView.backgroundColor = [UIColor whiteColor];
-    bgView.frame = CGRectMake(4, 2, KSCREEN_WIDTH - 8, 48);
-    [Tools configCornerOfView:bgView with:3];
-    [cell.contentView addSubview:bgView];
+    
     
     UIImageView *redV = [[UIImageView alloc] init];
     redV.frame = CGRectMake(4, 2, 4, 48);
@@ -101,9 +97,24 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
+    for (UIView *v in cell.contentView.subviews) {
+        if (v.tag == 100) {
+            [v removeFromSuperview];
+        }
+    }
+     UIView *bgView = [[UIView alloc] init];
+    bgView.tag = 100;
+    bgView.backgroundColor = [UIColor whiteColor];
+    bgView.frame = CGRectMake(4, 2, KSCREEN_WIDTH - 8, 48);
+    [Tools configCornerOfView:bgView with:3];
+    [cell.contentView addSubview:bgView];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, 200, 48)];
+    
+    lb.textAlignment = NSTextAlignmentLeft;
+    lb.textColor = [UIColor blackColor];
     NSDictionary *dic = self.dataSource[indexPath.row];
-    myCell.textLabel.text = [dic objectForKey:@"name"];
+    lb.text = [dic objectForKey:@"name"];
+    [bgView addSubview:lb];
   
    
 }

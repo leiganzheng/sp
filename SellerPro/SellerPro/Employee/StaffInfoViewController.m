@@ -238,7 +238,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 if ([response  isKindOfClass:[NSString class]]) {
                     [MBProgressHUD showError:(NSString *)response toView:self.view];
-                    [self.myTableView.mj_header endRefreshing];
+//                    [self.myTableView.mj_header endRefreshing];
                 }
             }
             

@@ -24,7 +24,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
         _myTableView.rowHeight = 100;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -54,9 +54,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         [self setLeftBackNavItem];
         self.title = @"添加员工";
     }
+    
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self featchData];
 }
-
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -162,9 +165,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             }else{
                 [MBProgressHUD showError:@"暂无数据" toView:self.view];
             }
+             [self.myTableView.mj_header endRefreshing];
         }else{
             if ([response  isKindOfClass:[NSString class]]) {
                 [MBProgressHUD showError:(NSString *)response toView:self.view];
+                 [self.myTableView.mj_header endRefreshing];
             }
         }
     }];

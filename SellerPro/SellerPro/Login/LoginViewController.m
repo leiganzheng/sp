@@ -23,8 +23,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _phoneTF.text = @"18682242936";
-    _pwTF.text = @"123";
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *name = [userDefault objectForKey:@"Pusername"];
+    _phoneTF.text = name;
     [Tools configCornerOfView:_login with:3];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.view addGestureRecognizer:tap];
@@ -53,19 +54,16 @@
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = _phoneTF.text;
                 ((AppDelegate*)[UIApplication sharedApplication].delegate).logo = dict[@"logo"];
                 
-//                NSString *sum = [NSString stringWithFormat:@"%@",[dict[@"token_expires"] integerValue]];
                 NSTimeInterval time=[dict[@"token_expires"] doubleValue];
                 NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
                 NSInteger i = [self interceptTimeStampFromStr:detaildate];
-//                if (time == 0) {
-//                    NSLog(@"------sum1=%f----",time);
-//                }else{
-//                    NSLog(@"-----sum2=%f----",time);
-//                }
-//                NSLog(@"----sum=%f,detaildate=%@,i=%i----",time,detaildate,i);
                 
                 [((AppDelegate*)[UIApplication sharedApplication].delegate) openCountdown:i];
-                
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                //登陆成功后把用户名存储到UserDefault
+                [userDefaults setObject:_phoneTF.text forKey:@"Pusername"];
+                [userDefaults synchronize];
+                 [MBProgressHUD showError:@"登录成功" toView:self.view];
                 //跳转
                 UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
                 MainViewController *main = [board instantiateViewControllerWithIdentifier:@"MainViewController"];
