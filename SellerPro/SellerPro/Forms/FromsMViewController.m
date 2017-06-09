@@ -33,7 +33,7 @@
     self.title = @"业绩报表";
     self.numberOfTabs = 3;   ///////当设置数量时，去调用setter方法去加载控件
     _btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_btn setTitle:@"2017-04" forState:UIControlStateNormal];
+    [_btn setTitle:[NSString stringWithFormat:@"%@-%@", [Tools nowDateofYear] , [Tools nowDateofMonth]] forState:UIControlStateNormal];//2017-04
     [_btn setImage:[UIImage imageNamed:@"home_btn_dropdown"] forState:UIControlStateNormal];
     _btn.frame = CGRectMake(0, 0, 80, 44);
     _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
@@ -124,7 +124,7 @@
 
 #pragma mark --TimeViewControllerDelegate
 - (void)didSelectedDate:(NSString *)date{
-    [_btn setTitle:date forState:UIControlStateNormal];
+    [_btn setTitle:[date substringFromIndex:5] forState:UIControlStateNormal];
     [_popover dismissPopoverAnimated:YES];
     if (self.currentIndex == 0) {
         [_formVc featchDataWithDate:date];
