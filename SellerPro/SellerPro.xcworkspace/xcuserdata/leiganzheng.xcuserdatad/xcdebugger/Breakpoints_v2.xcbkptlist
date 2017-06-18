@@ -56,7 +56,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
-            endingLineNumber = "105">
+            endingLineNumber = "105"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -70,7 +72,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
-            endingLineNumber = "102">
+            endingLineNumber = "102"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -117,7 +121,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
             endingLineNumber = "97"
-            landmarkName = "-forgetPW:"
+            landmarkName = "-interceptTimeStampFromStr:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -160,11 +164,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/Employee/StaffViewController.m"
-            timestampString = "516637957.394003"
+            timestampString = "519474124.351637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -368,7 +372,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/karashock/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516641327.546758"
+                  timestampString = "519473016.549756"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "264"
@@ -383,7 +387,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/karashock/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516641327.548435"
+                  timestampString = "519473016.553434"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "265"
@@ -1024,7 +1028,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/karashock/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516641327.564182"
+                  timestampString = "519473016.586895"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "354"
@@ -1039,7 +1043,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/karashock/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516641327.56665"
+                  timestampString = "519473016.590818"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "354"
@@ -1072,11 +1076,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/Employee/StaffViewController.m"
-            timestampString = "516639865.212723"
+            timestampString = "519474124.351637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "-featchData"
             landmarkType = "7">
          </BreakpointContent>
@@ -1152,7 +1156,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/karashock/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516641327.587349"
+                  timestampString = "519473016.622899"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "372"
@@ -1167,7 +1171,7 @@
                   moduleName = "SellerPro"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/karashock/sp/SellerPro/SellerPro/DTNetManger/DTNetManger.m"
-                  timestampString = "516641327.591337"
+                  timestampString = "519473016.627516"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "373"
@@ -1222,6 +1226,22 @@
             startingLineNumber = "94"
             endingLineNumber = "94"
             landmarkName = "-interceptTimeStampFromStr:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SellerPro/Employee/StaffViewController.m"
+            timestampString = "519473542.893881"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

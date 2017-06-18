@@ -92,16 +92,23 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     EmployeeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EmployeeTableViewCell *myCell = (EmployeeTableViewCell *)cell;
-    myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(KSCREEN_WIDTH-30, 34, 22, 22);
+    [btn setImage:[UIImage imageNamed:@"home_btn_next"] forState:UIControlStateNormal];
+    btn.backgroundColor = [UIColor clearColor];
+    [myCell.contentView addSubview:btn];
     NSDictionary *dict = self.dataSource[indexPath.row];
     myCell.name.text = [dict objectForKey:@"name"];
     myCell.time.text = [dict objectForKey:@"create_time"];
     myCell.logoName.text = [dict objectForKey:@"work_type"];
+    
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
